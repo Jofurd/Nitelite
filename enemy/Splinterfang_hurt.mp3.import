@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Splinterfang_hurt.mp3-828a50cde49ca000a5aab93ae5690e92.mp3str"
+
+[deps]
+
+source_file="res://enemy/Splinterfang_hurt.mp3"
+dest_files=[ "res://.import/Splinterfang_hurt.mp3-828a50cde49ca000a5aab93ae5690e92.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

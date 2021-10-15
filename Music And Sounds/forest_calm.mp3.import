@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/forest_calm.mp3-e17bb96e7d51d2f72d268426c26d7763.mp3str"
+
+[deps]
+
+source_file="res://Music And Sounds/forest_calm.mp3"
+dest_files=[ "res://.import/forest_calm.mp3-e17bb96e7d51d2f72d268426c26d7763.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
