@@ -12,7 +12,7 @@ func _process(_delta):
 	var areas = get_overlapping_areas()
 	if is_colliding():
 		if areas.size() > 0:
-			if actionTrack.volume_db <= -1:
+			if actionTrack.volume_db <= -11:
 					actionTrack.volume_db += 1
 	elif actionTrack.volume_db >= -50:
 		actionTrack.volume_db -= 0.12

@@ -1,0 +1,343 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://HBoxes/Hurtbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://HBoxes/SoftCollision.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HBoxes/VisibilityCheck.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/damage.tscn" type="PackedScene" id=4]
+[ext_resource path="res://enemy/PlayerDetectionZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sprites/Enemies/bushcreep.png" type="Texture" id=6]
+[ext_resource path="res://enemy/BushCreep.gd" type="Script" id=7]
+[ext_resource path="res://Prefabs/Stats.tscn" type="PackedScene" id=8]
+[ext_resource path="res://enemy/Splinterfang_death.mp3" type="AudioStream" id=9]
+[ext_resource path="res://enemy/Splinterfang_hurt.mp3" type="AudioStream" id=10]
+[ext_resource path="res://HBoxes/Hitbox.tscn" type="PackedScene" id=11]
+[ext_resource path="res://HBoxes/MusicZone.tscn" type="PackedScene" id=12]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("../death")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 1.05,
+"start_offset": 0.02,
+"stream": ExtResource( 9 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Emerge"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Hide"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "exit_hurt"
+} ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("../hurt")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 1.34,
+"start_offset": 0.02,
+"stream": ExtResource( 10 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Move"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 9 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Death"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Emerge"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Hide"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Hurt"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "Move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachine" id=21]
+states/Death/node = SubResource( 7 )
+states/Death/position = Vector2( 534, 46 )
+states/Emerge/node = SubResource( 8 )
+states/Emerge/position = Vector2( 692, 145 )
+states/Hide/node = SubResource( 9 )
+states/Hide/position = Vector2( 692, 226 )
+states/Hurt/node = SubResource( 10 )
+states/Hurt/position = Vector2( 692, 46 )
+states/Idle/node = SubResource( 11 )
+states/Idle/position = Vector2( 485, 145 )
+states/Move/node = SubResource( 12 )
+states/Move/position = Vector2( 869, 145 )
+transitions = [ "Hurt", "Death", SubResource( 13 ), "Emerge", "Move", SubResource( 14 ), "Hide", "Idle", SubResource( 15 ), "Move", "Hurt", SubResource( 16 ), "Idle", "Emerge", SubResource( 17 ), "Move", "Hide", SubResource( 18 ), "Idle", "Hurt", SubResource( 19 ), "Hurt", "Move", SubResource( 20 ) ]
+start_node = "Move"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="CircleShape2D" id=23]
+radius = 6.49321
+
+[sub_resource type="CircleShape2D" id=24]
+radius = 92.6397
+
+[sub_resource type="CircleShape2D" id=25]
+radius = 164.415
+
+[sub_resource type="CircleShape2D" id=26]
+radius = 13.4243
+
+[sub_resource type="CapsuleShape2D" id=27]
+radius = 3.77867
+height = 13.8176
+
+[sub_resource type="CircleShape2D" id=28]
+
+[sub_resource type="CircleShape2D" id=29]
+
+[node name="BushCreep" type="KinematicBody2D"]
+collision_layer = 16
+script = ExtResource( 7 )
+
+[node name="bushcreep" type="Sprite" parent="."]
+position = Vector2( 0, -5 )
+texture = ExtResource( 6 )
+hframes = 12
+vframes = 6
+frame = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="bushcreep"]
+anims/Death = SubResource( 1 )
+anims/Emerge = SubResource( 2 )
+anims/Hide = SubResource( 3 )
+anims/Hurt = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+anims/Move = SubResource( 6 )
+
+[node name="AnimationTree" type="AnimationTree" parent="bushcreep"]
+tree_root = SubResource( 21 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 22 )
+
+[node name="damage" parent="bushcreep" instance=ExtResource( 4 )]
+
+[node name="SoftCollision" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+position = Vector2( 0, 5 )
+shape = SubResource( 23 )
+
+[node name="DetectClosePlayer" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="CollisionShape2D" parent="DetectClosePlayer" index="0"]
+shape = SubResource( 24 )
+
+[node name="DetectFarPlayer" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="CollisionShape2D" parent="DetectFarPlayer" index="0"]
+shape = SubResource( 25 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 1 )]
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, -5 )
+shape = SubResource( 26 )
+
+[node name="VisibilityCheck" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="CollisionShape2D" parent="VisibilityCheck" index="0"]
+position = Vector2( 0, -5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 6 )
+rotation = 1.5708
+shape = SubResource( 27 )
+
+[node name="Stats" parent="." instance=ExtResource( 8 )]
+max_health = 8
+
+[node name="hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = 10.0
+
+[node name="death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = 10.0
+
+[node name="MusicZone" parent="." instance=ExtResource( 12 )]
+
+[node name="CollisionShape2D" parent="MusicZone" index="0"]
+shape = SubResource( 28 )
+disabled = true
+
+[node name="Hitbox" parent="." instance=ExtResource( 11 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+modulate = Color( 1, 0, 0, 1 )
+self_modulate = Color( 1, 0, 0, 1 )
+shape = SubResource( 29 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+
+[editable path="SoftCollision"]
+[editable path="DetectClosePlayer"]
+[editable path="DetectFarPlayer"]
+[editable path="Hurtbox"]
+[editable path="VisibilityCheck"]
+[editable path="MusicZone"]
+[editable path="Hitbox"]

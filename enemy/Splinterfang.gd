@@ -19,6 +19,9 @@ onready var hurtBox = $Hurtbox
 onready var softCollision = $SoftCollision
 onready var stopHurtSound = $hurt
 
+
+
+
 enum{
 	ATTACK,
 	HURT,
@@ -87,6 +90,7 @@ func _on_Hurtbox_area_entered(area):
 	state = HURT
 	stats.health -= area.damage
 	damageTint.play("DamageTint")
+	hurtBox.start_invincibility(.5)
 	
 	var splinterEffect = load("res://enemy/SplinterEffect.tscn")
 	var splinter_instance = splinterEffect.instance()

@@ -99,8 +99,8 @@ func roll_animation_finished():
 
 
 
-func _on_Hurtbox_area_entered(_area):
+func _on_Hurtbox_area_entered(area):
 	damageTint.play("DamageTint")
-	stats.health -= 1
-	hurtBox.start_invincibility(.2)
+	stats.health -= area.damage
+	hurtBox.start_invincibility(.5)
 
