@@ -21,7 +21,7 @@ onready var hurtBox = $Hurtbox
 onready var softCollision = $SoftCollision
 onready var stopHurtSound = $hurt
 onready var stopBeamSound = $startBeam
-onready var chaserBeam = $Sprite/flowerpointer/ChaserBeam
+
 
 enum{
 	HURT,
