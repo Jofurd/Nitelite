@@ -80,7 +80,7 @@ light_mask = 0
 wait_time = 0.5
 
 [node name="Sprite" parent="YSort/player" index="2"]
-frame = 3
+frame = 1
 
 [node name="AnimationTree" parent="YSort/player" index="7"]
 parameters/playback = SubResource( 2 )
@@ -2123,7 +2123,7 @@ position = Vector2( -848.749, 670.026 )
 position = Vector2( -944.101, 589.507 )
 
 [node name="Sapling8" parent="YSort/Splinterfangs" instance=ExtResource( 5 )]
-position = Vector2( 267.928, 476.966 )
+position = Vector2( 276.346, 525.232 )
 
 [node name="Sapling9" parent="YSort/Splinterfangs" instance=ExtResource( 5 )]
 position = Vector2( -837.989, 333.311 )
@@ -2192,28 +2192,28 @@ position = Vector2( -971.694, -858.55 )
 position = Vector2( -928.857, -903.907 )
 
 [node name="Splinterfang" parent="YSort/Splinterfangs" instance=ExtResource( 5 )]
-position = Vector2( 266.469, 525.043 )
+position = Vector2( 332.694, 527.288 )
 
 [node name="Splinterfang2" parent="YSort/Splinterfangs" instance=ExtResource( 5 )]
-position = Vector2( 336.629, 461.979 )
+position = Vector2( 388.823, 458.612 )
 
 [node name="Splinterfang3" parent="YSort/Splinterfangs" instance=ExtResource( 5 )]
-position = Vector2( 310.079, 437.175 )
+position = Vector2( 300.538, 443.349 )
 
 [node name="Splinterfang4" parent="YSort/Splinterfangs" instance=ExtResource( 5 )]
-position = Vector2( 321.701, 409.814 )
+position = Vector2( 331.242, 418.232 )
 
 [node name="Splinterfang5" parent="YSort/Splinterfangs" instance=ExtResource( 5 )]
 position = Vector2( 234.665, 371.283 )
 
 [node name="Splinterfang6" parent="YSort/Splinterfangs" instance=ExtResource( 5 )]
-position = Vector2( 245.993, 426.666 )
+position = Vector2( 261.707, 416.003 )
 
 [node name="Splinterfang7" parent="YSort/Splinterfangs" instance=ExtResource( 5 )]
-position = Vector2( 322.527, 497.011 )
+position = Vector2( 380.895, 535.175 )
 
 [node name="Splinterfang8" parent="YSort/Splinterfangs" instance=ExtResource( 5 )]
-position = Vector2( 319.626, 533.025 )
+position = Vector2( 401.566, 495.984 )
 
 [node name="Splinterfang9" parent="YSort/Splinterfangs" instance=ExtResource( 5 )]
 position = Vector2( 322.329, 571.556 )
@@ -3365,7 +3365,7 @@ position = Vector2( 9.28082, 429.062 )
 position = Vector2( -49.7113, 482.391 )
 
 [node name="Bush358" parent="YSort/Bushes" instance=ExtResource( 11 )]
-position = Vector2( -72.8362, 511.651 )
+position = Vector2( -75.3362, 518.651 )
 
 [node name="Bush359" parent="YSort/Bushes" instance=ExtResource( 11 )]
 position = Vector2( 216.79, 430.358 )
@@ -3500,7 +3500,7 @@ position = Vector2( -158.003, 467.514 )
 position = Vector2( -199.896, 529.251 )
 
 [node name="Bush403" parent="YSort/Bushes" instance=ExtResource( 11 )]
-position = Vector2( -93.7473, 499.327 )
+position = Vector2( -110.747, 513.827 )
 
 [node name="Bush404" parent="YSort/Bushes" instance=ExtResource( 11 )]
 position = Vector2( -119.261, 467.199 )
@@ -4394,7 +4394,19 @@ position = Vector2( 562.95, 611.645 )
 position = Vector2( -425.796, -772.741 )
 
 [node name="Flower" parent="YSort/flower" instance=ExtResource( 12 )]
-position = Vector2( 1097.83, 1554.63 )
+position = Vector2( 1070.71, 910.794 )
+
+[node name="Flower4" parent="YSort/flower" instance=ExtResource( 12 )]
+position = Vector2( 337.216, 1268.67 )
+
+[node name="Flower2" parent="YSort/flower" instance=ExtResource( 12 )]
+position = Vector2( 1173.48, 1334.52 )
+
+[node name="Flower3" parent="YSort/flower" instance=ExtResource( 12 )]
+position = Vector2( 1898.52, 408.295 )
+
+[node name="Flower5" parent="YSort/flower" instance=ExtResource( 12 )]
+position = Vector2( 1833.04, 337.469 )
 
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 0.196078, 0.376471, 0.709804, 0.494118 )

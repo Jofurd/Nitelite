@@ -6,18 +6,20 @@ onready var beam = $Beam
 onready var hitBox = $Hitbox
 onready var hitBoxCollider = $Hitbox/CollisionShape2D
 onready var hitBoxShape = preload("res://enemy/BeamShape.tres")
-onready var playerDetectionZone = $PlayerDetectionZone
+onready var closePlayerDetection = $ClosePlayerDetection
+onready var farPlayerDetection = $FarPlayerDetection
 
 
-
+var isBeamDisabled = false
 
 var test = Vector2.ZERO
 
 func _process(_delta):
 	var chaserBeam = $ChaserBeam
 	if chaserBeam != null:
-		var player = playerDetectionZone.player
-		if player != null:
+		var farPlayer = farPlayerDetection.player
+		if farPlayer != null:
+			isBeamDisabled = false
 			hitBoxCollider.disabled = false
 			look_at(chaserBeam.global_position)
 			var beamDistance = self.global_position.distance_to(chaserBeam.global_position)
@@ -25,12 +27,15 @@ func _process(_delta):
 			beam.region_rect.size.x = (beamDistance)
 			hitBox.position.x = (beamDistance / 2)
 			hitBoxShape.extents.x = (beamDistance / 2)
-	else:
+		else:
+			chaserBeam.queue_free()
+	elif isBeamDisabled == false:
 		beam.position.x = 0
 		beam.region_rect.size.x = 0
 		hitBox.position.x = 0
 		hitBoxShape.extents.x = 0
 		hitBoxCollider.disabled = true
+		isBeamDisabled = true
 			
 
 func shoot():
@@ -39,4 +44,10 @@ func shoot():
 	ball_instance.position = self.global_position
 	ball_instance.rotation_degrees = rotation_degrees
 	self.add_child(ball_instance)
+
+func clear_chaser():
+	var chaserBeam = $ChaserBeam
+	if chaserBeam != null:
+		chaserBeam.queue_free()
+
 

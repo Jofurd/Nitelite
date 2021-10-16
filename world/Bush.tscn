@@ -22,7 +22,7 @@ vframes = 6
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, -9 )
-collision_layer = 8
+collision_layer = 520
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 1 )
