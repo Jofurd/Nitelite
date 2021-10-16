@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://enemy/Flower.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Enemies/flower.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://enemy/Splinterfang_death.mp3" type="AudioStream" id=14]
 [ext_resource path="res://enemy/Splinterfang_hurt.mp3" type="AudioStream" id=15]
 [ext_resource path="res://Music And Sounds/start_beam.mp3" type="AudioStream" id=16]
+[ext_resource path="res://enemy/ChaserBeam.tscn" type="PackedScene" id=17]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Burrow"
@@ -295,6 +296,15 @@ animation = "Shooting"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=28]
 switch_mode = 2
 
@@ -302,25 +312,16 @@ switch_mode = 2
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=31]
-switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
-switch_mode = 2
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=44]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
-
-[sub_resource type="AnimationNodeStateMachine" id=32]
+[sub_resource type="AnimationNodeStateMachine" id=35]
 states/Burrow/node = SubResource( 10 )
 states/Burrow/position = Vector2( 450, 236 )
 states/Charge/node = SubResource( 11 )
@@ -339,28 +340,28 @@ states/Idle/node = SubResource( 17 )
 states/Idle/position = Vector2( 592, 161 )
 states/Shooting/node = SubResource( 18 )
 states/Shooting/position = Vector2( 914, 167 )
-transitions = [ "Idle", "Charge", SubResource( 19 ), "Shooting", "Finish", SubResource( 20 ), "Idle", "Burrow", SubResource( 21 ), "Hidden", "Emerge", SubResource( 22 ), "Idle", "Hurt", SubResource( 23 ), "Shooting", "Hurt", SubResource( 24 ), "Burrow", "Hidden", SubResource( 28 ), "Emerge", "Idle", SubResource( 29 ), "Finish", "Idle", SubResource( 30 ), "Charge", "Shooting", SubResource( 31 ), "Hurt", "Idle", SubResource( 40 ), "Idle", "Death", SubResource( 41 ), "Charge", "Death", SubResource( 42 ), "Shooting", "Death", SubResource( 43 ), "Finish", "Death", SubResource( 44 ), "Charge", "Hurt", SubResource( 45 ) ]
+transitions = [ "Idle", "Charge", SubResource( 19 ), "Shooting", "Finish", SubResource( 20 ), "Idle", "Burrow", SubResource( 21 ), "Hidden", "Emerge", SubResource( 22 ), "Idle", "Hurt", SubResource( 23 ), "Shooting", "Hurt", SubResource( 24 ), "Burrow", "Hidden", SubResource( 25 ), "Emerge", "Idle", SubResource( 26 ), "Finish", "Idle", SubResource( 27 ), "Charge", "Shooting", SubResource( 28 ), "Hurt", "Idle", SubResource( 29 ), "Idle", "Death", SubResource( 30 ), "Charge", "Death", SubResource( 31 ), "Shooting", "Death", SubResource( 32 ), "Finish", "Death", SubResource( 33 ), "Charge", "Hurt", SubResource( 34 ) ]
 start_node = "Idle"
 graph_offset = Vector2( 64, -43 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=33]
-
-[sub_resource type="CircleShape2D" id=34]
-radius = 174.261
-
-[sub_resource type="CircleShape2D" id=39]
-radius = 589.605
-
-[sub_resource type="CircleShape2D" id=35]
-radius = 2.3837
-
-[sub_resource type="CircleShape2D" id=36]
-radius = 61.5324
+[sub_resource type="AnimationNodeStateMachinePlayback" id=36]
 
 [sub_resource type="CircleShape2D" id=37]
-radius = 17.2505
+radius = 174.261
 
 [sub_resource type="CircleShape2D" id=38]
+radius = 589.605
+
+[sub_resource type="CircleShape2D" id=39]
+radius = 2.3837
+
+[sub_resource type="CircleShape2D" id=40]
+radius = 61.5324
+
+[sub_resource type="CircleShape2D" id=41]
+radius = 17.2505
+
+[sub_resource type="CircleShape2D" id=42]
 radius = 20.5776
 
 [node name="Flower" type="KinematicBody2D"]
@@ -378,7 +379,7 @@ position = Vector2( 0, -15 )
 texture = ExtResource( 2 )
 hframes = 4
 vframes = 6
-frame = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 anims/Burrow = SubResource( 1 )
@@ -392,30 +393,48 @@ anims/Idle = SubResource( 8 )
 anims/Shooting = SubResource( 9 )
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
-tree_root = SubResource( 32 )
+tree_root = SubResource( 35 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 33 )
+parameters/playback = SubResource( 36 )
 
 [node name="flowerpointer" type="Node2D" parent="Sprite"]
 position = Vector2( -7.14762, -2.4486 )
 script = ExtResource( 4 )
 
+[node name="ChaserBeam" parent="Sprite/flowerpointer" instance=ExtResource( 17 )]
+MAX_SPEED = 120
+
+[node name="burnpatch" parent="Sprite/flowerpointer/ChaserBeam" index="0"]
+emitting = false
+
+[node name="AnimatedSprite" parent="Sprite/flowerpointer/ChaserBeam" index="1"]
+scale = Vector2( 1e-05, 1e-05 )
+
+[node name="smoke" parent="Sprite/flowerpointer/ChaserBeam" index="2"]
+emitting = false
+
+[node name="Hitbox" parent="Sprite/flowerpointer/ChaserBeam" index="4"]
+damage = 3
+
+[node name="AudioStreamPlayer2D" parent="Sprite/flowerpointer/ChaserBeam" index="6"]
+autoplay = false
+
 [node name="Beam" type="Sprite" parent="Sprite/flowerpointer"]
 texture = ExtResource( 3 )
 offset = Vector2( 1, 0 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 20, 16 )
+region_rect = Rect2( 0, 0, 0, 16 )
 
 [node name="ClosePlayerDetection" parent="Sprite/flowerpointer" instance=ExtResource( 5 )]
 visible = false
 
 [node name="CollisionShape2D" parent="Sprite/flowerpointer/ClosePlayerDetection" index="0"]
-shape = SubResource( 34 )
+shape = SubResource( 37 )
 
 [node name="Hitbox" parent="Sprite/flowerpointer" instance=ExtResource( 6 )]
 collision_mask = 516
-damage = 5
+damage = 3
 
 [node name="CollisionShape2D" parent="Sprite/flowerpointer/Hitbox" index="0"]
 position = Vector2( 1, 0 )
@@ -425,24 +444,24 @@ shape = ExtResource( 7 )
 visible = false
 
 [node name="CollisionShape2D" parent="Sprite/flowerpointer/FarPlayerDetection" index="0"]
-shape = SubResource( 39 )
+shape = SubResource( 38 )
 
 [node name="damage" parent="Sprite" instance=ExtResource( 10 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 35 )
+shape = SubResource( 39 )
 
 [node name="MusicZone" parent="." instance=ExtResource( 9 )]
 
 [node name="CollisionShape2D" parent="MusicZone" index="0"]
-shape = SubResource( 36 )
+shape = SubResource( 40 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 8 )]
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -15 )
-shape = SubResource( 37 )
+shape = SubResource( 41 )
 
 [node name="Stats" parent="." instance=ExtResource( 11 )]
 max_health = 3
@@ -452,7 +471,7 @@ visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 position = Vector2( 0, -10 )
-shape = SubResource( 38 )
+shape = SubResource( 42 )
 
 [node name="hurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
@@ -467,6 +486,9 @@ stream = ExtResource( 16 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="VisibilityCheck"]
+[editable path="Sprite/flowerpointer/ChaserBeam"]
+[editable path="Sprite/flowerpointer/ChaserBeam/PlayerDetectionZone"]
+[editable path="Sprite/flowerpointer/ChaserBeam/Hitbox"]
 [editable path="Sprite/flowerpointer/ClosePlayerDetection"]
 [editable path="Sprite/flowerpointer/Hitbox"]
 [editable path="Sprite/flowerpointer/FarPlayerDetection"]
