@@ -89,6 +89,7 @@ dash={
 2d_physics/layer_7="MusicLayer"
 2d_physics/layer_8="MobVisibility"
 2d_physics/layer_9="ObjectVisibility"
+2d_physics/layer_10="LaserTarget"
 
 [physics]
 

@@ -8,12 +8,13 @@ polygon = PoolVector2Array( -32.0159, 12.2108, -20.4211, 9.98106, -14.4751, 6.63
 [node name="stump" type="StaticBody2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -40 )
+position = Vector2( -2.78406, -48.3522 )
 texture = ExtResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( 0, -40 )
+position = Vector2( -2.78406, -48.3522 )
 polygon = PoolVector2Array( -16, 48, -16, 56, 24, 56, 24, 48, 16, 40, -8, 40, -16, 48 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2( -2.78406, -8.35217 )
 occluder = SubResource( 1 )

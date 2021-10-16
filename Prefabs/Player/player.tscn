@@ -585,7 +585,7 @@ position = Vector2( 0, -10 )
 texture = ExtResource( 1 )
 hframes = 12
 vframes = 6
-frame = 3
+frame = 2
 
 [node name="damage" parent="Sprite" instance=ExtResource( 8 )]
 
@@ -650,6 +650,9 @@ collision_layer = 4
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 47 )
 
+[node name="Timer" parent="Hurtbox" index="1"]
+wait_time = 5.0
+
 [node name="EnemyDetectionZone" type="Area2D" parent="."]
 visible = false
 collision_layer = 64
@@ -659,11 +662,12 @@ script = ExtResource( 10 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionZone"]
 shape = SubResource( 48 )
 
-[node name="forest_calm" type="AudioStreamPlayer2D" parent="EnemyDetectionZone"]
+[node name="forest_calm" type="AudioStreamPlayer" parent="EnemyDetectionZone"]
 stream = ExtResource( 7 )
+volume_db = -10.0
 autoplay = true
 
-[node name="forest_action" type="AudioStreamPlayer2D" parent="EnemyDetectionZone"]
+[node name="forest_action" type="AudioStreamPlayer" parent="EnemyDetectionZone"]
 stream = ExtResource( 11 )
 volume_db = -50.0
 autoplay = true

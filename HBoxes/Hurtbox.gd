@@ -3,6 +3,7 @@ extends Area2D
 var invincible = false setget set_invincible
 
 onready var timer = $Timer
+export onready var duration = $Timer.wait_time
 
 signal invincibility_started
 signal invincibility_ended

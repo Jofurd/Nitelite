@@ -9,13 +9,15 @@ polygon = PoolVector2Array( -32.0159, 12.2108, -20.4211, 9.98106, -14.4751, 6.63
 [node name="dark tree" type="StaticBody2D"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( 0, -40 )
+position = Vector2( -2.66685, -49.1725 )
 polygon = PoolVector2Array( -16, 48, -16, 56, 24, 56, 24, 48, 16, 40, -8, 40, -16, 48 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2( -2.66685, -9.1725 )
 occluder = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2( -2.66685, -9.1725 )
 collision_layer = 256
 collision_mask = 128
 script = ExtResource( 2 )

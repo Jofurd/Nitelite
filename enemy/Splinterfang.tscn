@@ -10,6 +10,7 @@
 [ext_resource path="res://HBoxes/SoftCollision.tscn" type="PackedScene" id=8]
 [ext_resource path="res://enemy/Splinterfang_death.mp3" type="AudioStream" id=9]
 [ext_resource path="res://enemy/Splinterfang_hurt.mp3" type="AudioStream" id=10]
+[ext_resource path="res://HBoxes/VisibilityCheck.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.89649
@@ -46,18 +47,6 @@ tracks/1/keys = {
 "method": "exit_attack"
 } ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("../Hitbox/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.2, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
 
 [sub_resource type="Animation" id=4]
 length = 0.9
@@ -88,42 +77,42 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Hitbox/CollisionShape2D:disabled")
+tracks/2/path = NodePath(".:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0.000961971, 0.0105817, 0.0885013, 0.098121, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
 }
-tracks/4/type = "audio"
-tracks/4/path = NodePath("../death")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/3/type = "audio"
+tracks/3/path = NodePath("../death")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.68,
 "start_offset": 0.02,
 "stream": ExtResource( 9 )
 } ],
 "times": PoolRealArray( 0 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Hitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -158,25 +147,13 @@ tracks/1/keys = {
 "method": "stop_hurt_sound"
 } ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("../Hitbox/CollisionShape2D:disabled")
+tracks/2/type = "audio"
+tracks/2/path = NodePath("../hurt")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/3/type = "audio"
-tracks/3/path = NodePath("../hurt")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "clips": [ {
 "end_offset": 1.33,
 "start_offset": 0.02,
@@ -200,18 +177,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 8, 9, 10, 11 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Hitbox/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=7]
 length = 0.6
@@ -227,18 +192,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Hitbox/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=8]
@@ -305,9 +258,6 @@ radius = 6.95143
 [sub_resource type="CircleShape2D" id=27]
 radius = 45.75
 
-[sub_resource type="CircleShape2D" id=28]
-radius = 12.0026
-
 [node name="Splinterfang" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 2 )
@@ -356,7 +306,7 @@ shape = SubResource( 23 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 visible = false
-collision_layer = 8
+collision_layer = 520
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -8 )
@@ -377,11 +327,11 @@ shape = SubResource( 25 )
 modulate = Color( 1, 0, 0, 1 )
 self_modulate = Color( 1, 0, 0, 1 )
 collision_mask = 4
+damage = 2
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( -0.334087, -10.0045 )
 shape = SubResource( 26 )
-disabled = true
 
 [node name="MusicZone" type="Area2D" parent="."]
 visible = false
@@ -394,19 +344,13 @@ shape = SubResource( 27 )
 
 [node name="death" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-volume_db = 10.0
+volume_db = 24.0
 
 [node name="hurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
-volume_db = 10.0
+volume_db = 24.0
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 128
-collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -6 )
-shape = SubResource( 28 )
+[node name="VisibilityCheck" parent="." instance=ExtResource( 11 )]
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
