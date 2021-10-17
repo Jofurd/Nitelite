@@ -22,7 +22,8 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var hurtBox = $Hurtbox
 onready var enemyDetect = $EnemyDetectionZone
-
+onready var dashPlayer = $dash
+onready var dashAudio = $dash/audio
 
 func _ready():
 	stats.connect("no_health", self, "queue_free")
@@ -80,12 +81,16 @@ func dash_state(_delta):
 	move()
 
 func dash_start():
+	dashPlayer.stop()
+	dashPlayer.play("dash")
 	var startDash = load("res://Prefabs/Player/DashStartEffect.tscn")
 	var startdash_instance = startDash.instance()
 	startdash_instance.position = global_position
 	var world = get_tree().current_scene
 	world.add_child(startdash_instance)
 
+func stop_dash_sound():
+	dashAudio.playing = false
 
 func move():
 	velocity = move_and_slide(velocity)

@@ -33,7 +33,7 @@ enum{
 
 
 var state = IDLE
-func _physics_process(delta):
+func _physics_process(_delta):
 	match state:
 		HURT:
 			sprite.flip_h = velocity.x > 0

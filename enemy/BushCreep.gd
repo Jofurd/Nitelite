@@ -75,13 +75,15 @@ func hurt_state():
 	animationState.travel("Hurt")
 
 func exit_hurt():
-	stopHurtSound.playing = false
 	if closePlayerDetect.can_see_player():
 		musicZone.disabled = false
 		hitbox.disabled = false
 		state = CHASE
 	else:
 		state = IDLE
+
+func stop_hurt_sound():
+	stopHurtSound.playing = false
 
 func _on_Stats_no_health():
 	death_state()

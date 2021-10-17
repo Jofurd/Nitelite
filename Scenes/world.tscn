@@ -80,7 +80,7 @@ light_mask = 0
 wait_time = 0.5
 
 [node name="Sprite" parent="YSort/player" index="2"]
-frame = 0
+frame = 2
 
 [node name="AnimationTree" parent="YSort/player" index="7"]
 parameters/playback = SubResource( 2 )
@@ -2291,6 +2291,9 @@ position = Vector2( 249.711, 968.371 )
 [node name="BushCreep5" parent="YSort/Bushcreeps" instance=ExtResource( 10 )]
 position = Vector2( -233.291, 748.299 )
 
+[node name="BushCreep6" parent="YSort/Bushcreeps" instance=ExtResource( 10 )]
+position = Vector2( 626.557, 770.057 )
+
 [node name="Bushes" type="YSort" parent="YSort"]
 
 [node name="Bush" parent="YSort/Bushes" instance=ExtResource( 11 )]
@@ -4400,7 +4403,7 @@ position = Vector2( 1070.71, 910.794 )
 position = Vector2( 337.216, 1268.67 )
 
 [node name="Flower2" parent="YSort/flower" instance=ExtResource( 12 )]
-position = Vector2( 1173.48, 1334.52 )
+position = Vector2( 1471.19, 1288.96 )
 
 [node name="Flower3" parent="YSort/flower" instance=ExtResource( 12 )]
 position = Vector2( 1898.52, 408.295 )

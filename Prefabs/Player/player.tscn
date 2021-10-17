@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Sprites/Player/mage.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player/player.gd" type="Script" id=2]
@@ -11,6 +11,15 @@
 [ext_resource path="res://HBoxes/Hurtbox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scripts/Player/EnemyDetectionZone.gd" type="Script" id=10]
 [ext_resource path="res://Music And Sounds/forest_action.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Music And Sounds/hornet_dash.mp3" type="AudioStream" id=12]
+[ext_resource path="res://Prefabs/Player/PauseHandler.gd" type="Script" id=13]
+[ext_resource path="res://Sprites/Player/paused.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/UI/quit_normal.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/UI/resume_normal.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/UI/resume_hover.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/UI/quit_pressed.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/UI/quit_hover.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/UI/resume_pressed.png" type="Texture" id=20]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 5.47642, 4.89058, 3.95344, 5.02302, 0.708849, 9.52575, -8.6939, 4.82441, -16.7061, 5.95013, -19.4209, 10.188, -26.1088, 0.387977, -20.0832, -9.80938, -16.8386, -6.56478, -8.82637, -4.57832, 0.973645, -9.74324, 3.5561, -4.84323, 5.9399, -4.77702, 5.93991, -2.19458, 3.8872, -2.12836, 3.821, 2.17571, 5.80749, 2.10949 )
@@ -549,13 +558,41 @@ radius = 174.683
 radius = 2.45175
 height = 13.458
 
+[sub_resource type="Animation" id=50]
+resource_name = "dash"
+tracks/0/type = "audio"
+tracks/0/path = NodePath("dash/audio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.06,
+"start_offset": 0.0,
+"stream": ExtResource( 12 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop_dash_sound"
+} ]
+}
+
 [node name="player" type="KinematicBody2D"]
 position = Vector2( 0, 0.187286 )
 collision_layer = 2
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 MAX_SPEED = 120
 
 [node name="HealthUI" parent="." instance=ExtResource( 6 )]
@@ -681,8 +718,62 @@ position = Vector2( 0, 3 )
 rotation = 1.57079
 shape = SubResource( 49 )
 
+[node name="dash" type="AnimationPlayer" parent="."]
+anims/dash = SubResource( 50 )
+
+[node name="audio" type="AudioStreamPlayer" parent="dash"]
+stream = ExtResource( 12 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseHandler" type="Popup" parent="CanvasLayer"]
+pause_mode = 2
+margin_top = 0.187286
+margin_right = 40.0
+margin_bottom = 40.1873
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/PauseHandler"]
+modulate = Color( 1, 1, 1, 0.701961 )
+position = Vector2( 263.409, 143.894 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 14 )
+
+[node name="resume" type="TextureButton" parent="CanvasLayer/PauseHandler"]
+margin_left = 207.0
+margin_top = 87.453
+margin_right = 249.0
+margin_bottom = 99.453
+rect_scale = Vector2( 1.2, 1.2 )
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 20 )
+texture_hover = ExtResource( 17 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit" type="TextureButton" parent="CanvasLayer/PauseHandler"]
+margin_left = 207.0
+margin_top = 200.0
+margin_right = 260.0
+margin_bottom = 212.0
+rect_scale = Vector2( 1.2, 1.2 )
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 18 )
+texture_hover = ExtResource( 19 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="timeout" from="pointer/Timer" to="pointer" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="pressed" from="CanvasLayer/PauseHandler/resume" to="CanvasLayer/PauseHandler" method="_on_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseHandler/quit" to="CanvasLayer/PauseHandler" method="_on_quit_pressed"]
 
 [editable path="HealthUI"]
 [editable path="Hurtbox"]
