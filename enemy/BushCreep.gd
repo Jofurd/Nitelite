@@ -16,9 +16,9 @@ onready var farPlayerDetect = $DetectFarPlayer
 onready var damageTint = $bushcreep/damage
 onready var hurtBox = $Hurtbox
 onready var softCollision = $SoftCollision
-onready var stopHurtSound = $hurt
 onready var musicZone =$MusicZone/CollisionShape2D
 onready var hitbox = $Hitbox/CollisionShape2D
+
 
 
 enum{
@@ -82,8 +82,6 @@ func exit_hurt():
 	else:
 		state = IDLE
 
-func stop_hurt_sound():
-	stopHurtSound.playing = false
 
 func _on_Stats_no_health():
 	death_state()
@@ -103,3 +101,8 @@ func _on_Hurtbox_area_entered(area):
 	splinter_instance.position = global_position
 	var world = get_tree().current_scene
 	world.add_child(splinter_instance)
+	
+	var hurt_soundEffect = load("res://Prefabs/Sounds/small_grass_poof.tscn")
+	var hurt_sound_instance = hurt_soundEffect.instance()
+	hurt_sound_instance.position = global_position
+	world.add_child(hurt_sound_instance)

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/moss_charger_leafy_explode.mp3-4c53aa92a1a5aeab3f31e
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

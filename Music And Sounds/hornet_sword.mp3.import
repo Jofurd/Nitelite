@@ -11,5 +11,5 @@ dest_files=[ "res://.import/hornet_sword.mp3-57b8fda9cd97667140b1a5775865ab6d.mp
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

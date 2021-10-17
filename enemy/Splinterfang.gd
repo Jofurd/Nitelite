@@ -4,7 +4,7 @@ var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
 export var ACCELERATION = 300
 export var MAX_SPEED = 50
-export var FRICTION = 150
+export var FRICTION = 300
 export var DASH_SPEED = 300
 
 onready var stats = $Stats
@@ -18,7 +18,7 @@ onready var damageTint = $sprite/damage
 onready var hurtBox = $Hurtbox
 onready var softCollision = $SoftCollision
 onready var stopHurtSound = $hurt
-
+onready var timer = $Timer
 
 
 
@@ -32,15 +32,19 @@ enum{
 }
 
 var state = IDLE
+var timerCheck = false
 func _physics_process(delta):
 	match state:
 		ATTACK:
 			var targetPlayer = attackRange.player
 			if targetPlayer != null:
-				animationState.travel("Attack")
-				var direction = (targetPlayer.global_position - global_position).normalized()
-				velocity = velocity.move_toward(direction * DASH_SPEED, ACCELERATION * delta)
-				sprite.flip_h = velocity.x > 0
+				if timerCheck == true:
+					animationState.travel("Attack")
+					var direction = (targetPlayer.global_position - global_position).normalized()
+					velocity = velocity.move_toward(direction * DASH_SPEED, ACCELERATION * delta)
+					sprite.flip_h = velocity.x > 0
+				else:
+					state = IDLE
 			else:
 				state = IDLE
 			
@@ -79,7 +83,10 @@ func exit_attack():
 
 func lunge_player():
 	if attackRange.can_see_player():
-		state = ATTACK
+		if timerCheck == false:
+			timerCheck = true
+			timer.start()
+			state = ATTACK
 
 func seek_player():
 	if playerDetectionZone.can_see_player():
@@ -117,3 +124,7 @@ func _on_Stats_no_health():
 func death_state():
 	state = DEATH
 	animationState.travel("Death")
+
+
+func _on_Timer_timeout():
+	timerCheck = false
