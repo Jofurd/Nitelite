@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/moss_charger_leafy_explode.mp3-4c53aa92a1a5aeab3f31eec4cb7e2bce.mp3str"
+
+[deps]
+
+source_file="res://Music And Sounds/moss_charger_leafy_explode.mp3"
+dest_files=[ "res://.import/moss_charger_leafy_explode.mp3-4c53aa92a1a5aeab3f31eec4cb7e2bce.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

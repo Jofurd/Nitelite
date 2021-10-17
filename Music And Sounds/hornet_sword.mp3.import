@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hornet_sword.mp3-57b8fda9cd97667140b1a5775865ab6d.mp3str"
+
+[deps]
+
+source_file="res://Music And Sounds/hornet_sword.mp3"
+dest_files=[ "res://.import/hornet_sword.mp3-57b8fda9cd97667140b1a5775865ab6d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

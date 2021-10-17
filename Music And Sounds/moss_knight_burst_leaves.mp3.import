@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/moss_knight_burst_leaves.mp3-8a49619436d2d329171772f6ab49e9d8.mp3str"
+
+[deps]
+
+source_file="res://Music And Sounds/moss_knight_burst_leaves.mp3"
+dest_files=[ "res://.import/moss_knight_burst_leaves.mp3-8a49619436d2d329171772f6ab49e9d8.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
