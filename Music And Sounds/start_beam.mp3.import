@@ -11,5 +11,5 @@ dest_files=[ "res://.import/start_beam.mp3-bf30afa170943fefacc9c1f7f48ae3ab.mp3s
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

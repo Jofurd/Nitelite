@@ -80,7 +80,7 @@ light_mask = 0
 wait_time = 0.5
 
 [node name="Sprite" parent="YSort/player" index="2"]
-frame = 2
+frame = 0
 
 [node name="AnimationTree" parent="YSort/player" index="7"]
 parameters/playback = SubResource( 2 )

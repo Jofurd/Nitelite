@@ -11,5 +11,5 @@ dest_files=[ "res://.import/moss_knight_burst_leaves.mp3-8a49619436d2d329171772f
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

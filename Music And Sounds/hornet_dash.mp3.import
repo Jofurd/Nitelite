@@ -11,5 +11,5 @@ dest_files=[ "res://.import/hornet_dash.mp3-31badfef5678ea8ddc90adfa9084db91.mp3
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

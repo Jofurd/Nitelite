@@ -352,8 +352,13 @@ volume_db = 24.0
 
 [node name="VisibilityCheck" parent="." instance=ExtResource( 11 )]
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 [editable path="SoftCollision"]
 [editable path="PlayerDetectionZone"]

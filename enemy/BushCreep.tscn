@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://HBoxes/Hurtbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://HBoxes/SoftCollision.tscn" type="PackedScene" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://enemy/BushCreep.gd" type="Script" id=7]
 [ext_resource path="res://Prefabs/Stats.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Music And Sounds/moss_charger_leafy_explode.mp3" type="AudioStream" id=9]
-[ext_resource path="res://Music And Sounds/moss_knight_burst_leaves.mp3" type="AudioStream" id=10]
 [ext_resource path="res://HBoxes/Hitbox.tscn" type="PackedScene" id=11]
 [ext_resource path="res://HBoxes/MusicZone.tscn" type="PackedScene" id=12]
 
@@ -228,24 +227,6 @@ height = 13.8176
 
 [sub_resource type="CircleShape2D" id=29]
 
-[sub_resource type="Animation" id=30]
-resource_name = "hurt"
-length = 0.8
-tracks/0/type = "audio"
-tracks/0/path = NodePath("hurt/audio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"clips": [ {
-"end_offset": 0.0750337,
-"start_offset": 0.0,
-"stream": ExtResource( 10 )
-} ],
-"times": PoolRealArray( 0 )
-}
-
 [node name="BushCreep" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 7 )
@@ -330,13 +311,6 @@ collision_mask = 4
 modulate = Color( 1, 0, 0, 1 )
 self_modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 29 )
-
-[node name="hurt" type="AnimationPlayer" parent="."]
-anims/hurt = SubResource( 30 )
-
-[node name="audio" type="AudioStreamPlayer" parent="hurt"]
-stream = ExtResource( 10 )
-volume_db = 10.0
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
