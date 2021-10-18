@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 var velocity = Vector2.ZERO
-export var ACCELERATION = 300
-export var MAX_SPEED = 100
+export var ACCELERATION = 200
+export var MAX_SPEED = 70
 export var FRICTION = 150
 export var DASH_SPEED = 300
 
@@ -21,6 +21,7 @@ onready var hurtBox = $Hurtbox
 onready var softCollision = $SoftCollision
 onready var stopHurtSound = $hurt
 onready var stopBeamSound = $startBeam
+onready var burrowTimer = $BurrowTimer
 
 
 enum{
@@ -28,12 +29,15 @@ enum{
 	DEATH,
 	IDLE,
 	MOVING,
-	SHOOTING
+	SHOOTING,
+	BURROWING,
+	EMERGING
 }
 
 
 var state = IDLE
-func _physics_process(_delta):
+var burrowTimerCheck = false
+func _physics_process(delta):
 	match state:
 		HURT:
 			sprite.flip_h = velocity.x > 0
@@ -48,13 +52,28 @@ func _physics_process(_delta):
 			seek_player()
 		
 		MOVING:
-			pass
+			var burrowEffect = load("res://Prefabs/Effects/BurrowingFlower.tscn")
+			var burrow_instance = burrowEffect.instance()
+			burrow_instance.position = global_position
+			var world = get_tree().current_scene
+			world.add_child(burrow_instance)
+			move_state(delta)
 		
 		SHOOTING:
 			var farPlayer = farPlayerDetection.player
 			if farPlayer == null:
 				animationState.travel("Idle")
 				state = IDLE
+		
+		BURROWING:
+			var burrowEffect = load("res://Prefabs/Effects/BurrowingFlower.tscn")
+			var burrow_instance = burrowEffect.instance()
+			burrow_instance.position = global_position
+			var world = get_tree().current_scene
+			world.add_child(burrow_instance)
+		
+		EMERGING:
+			velocity = Vector2.ZERO
 		
 	
 	velocity = move_and_slide(velocity)
@@ -65,15 +84,36 @@ func seek_player():
 		animationState.travel("Shooting")
 		state = SHOOTING
 
+func move_state(delta):
+	var player = farPlayerDetection.player
+	if burrowTimerCheck == true:
+		if player != null:
+			var direction = (player.global_position - global_position).normalized()
+			velocity = velocity.move_toward(direction * (MAX_SPEED * -1), (ACCELERATION * -1) * delta)
+	else:
+		state = EMERGING
+		animationState.travel("Idle")
 
 
-func hurt_state():	
+func hurt_state():
 	animationState.travel("Hurt")
 
 func exit_hurt():
+	state = BURROWING
 	stopHurtSound.playing = false
+	animationState.travel("Hidden")
+	hurtBox.monitorable = false
+	hurtBox.monitoring = false
+
+func burrowed():
+	state = MOVING
+	burrowTimer.start()
+	burrowTimerCheck = true
+
+func emerged():
+	hurtBox.monitorable = true
+	hurtBox.monitoring = true
 	if farPlayerDetection.can_see_player():
-		musicZone.disabled = false
 		animationState.travel("Shooting")
 		state = SHOOTING
 	else:
@@ -98,3 +138,7 @@ func _on_Hurtbox_area_entered(area):
 	splinter_instance.position = global_position
 	var world = get_tree().current_scene
 	world.add_child(splinter_instance)
+
+
+func _on_BurrowTimer_timeout():
+	burrowTimerCheck = false

@@ -55,10 +55,20 @@ func can_see_campfire():
 	return campfire != null
 
 var respawnPoint = self.global_position
+var respawn_ID = 1
 func _on_RespawnFinder_area_entered(area):
 	campfire = area
-	respawnPoint = area.global_position
-	respawnPoint.y -= 20
+	if campfire.get_parent().respawn_ID != self.respawn_ID:
+		respawnPoint = campfire.global_position
+		respawnPoint.y -= 20
+		respawn_ID = campfire.get_parent().respawn_ID
+		
+		var campfireActivate = load("res://Prefabs/Effects/CampfireActivate.tscn")
+		var cfActivate_instance = campfireActivate.instance()
+		cfActivate_instance.position = global_position
+		var world = get_tree().current_scene
+		world.add_child(cfActivate_instance)
+	
 
 
 func _on_RespawnFinder_area_exited(_area):
