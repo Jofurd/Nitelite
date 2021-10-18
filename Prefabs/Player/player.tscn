@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://Sprites/Player/mage.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player/player.gd" type="Script" id=2]
@@ -23,6 +23,11 @@
 [ext_resource path="res://Sprites/UI/respawn_normal.png" type="Texture" id=21]
 [ext_resource path="res://Sprites/UI/respawn_pressed.png" type="Texture" id=22]
 [ext_resource path="res://Prefabs/Player/RespawnFinder.gd" type="Script" id=23]
+[ext_resource path="res://HBoxes/Hitbox.tscn" type="PackedScene" id=24]
+
+[sub_resource type="CapsuleShape2D" id=51]
+radius = 2.50556
+height = 36.0116
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 5.47642, 4.89058, 3.95344, 5.02302, 0.708849, 9.52575, -8.6939, 4.82441, -16.7061, 5.95013, -19.4209, 10.188, -26.1088, 0.387977, -20.0832, -9.80938, -16.8386, -6.56478, -8.82637, -4.57832, 0.973645, -9.74324, 3.5561, -4.84323, 5.9399, -4.77702, 5.93991, -2.19458, 3.8872, -2.12836, 3.821, 2.17571, 5.80749, 2.10949 )
@@ -577,6 +582,7 @@ margin_right = 32.283
 margin_bottom = 0.784954
 
 [node name="pointer" type="Node2D" parent="."]
+position = Vector2( 0, -7 )
 script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="pointer"]
@@ -589,15 +595,23 @@ texture = ExtResource( 5 )
 position = Vector2( 25, 0 )
 
 [node name="Timer" type="Timer" parent="pointer"]
-wait_time = 0.2
-autostart = true
+process_mode = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="Hitbox" parent="pointer" instance=ExtResource( 24 )]
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="pointer/Hitbox" index="0"]
+position = Vector2( 18.5975, 0 )
+rotation = 1.57079
+shape = SubResource( 51 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -10 )
 texture = ExtResource( 1 )
 hframes = 12
 vframes = 6
-frame = 2
 
 [node name="damage" parent="Sprite" instance=ExtResource( 8 )]
 
@@ -783,4 +797,5 @@ shape = SubResource( 50 )
 [connection signal="area_exited" from="RespawnFinder" to="." method="_on_RespawnFinder_area_exited"]
 
 [editable path="HealthUI"]
+[editable path="pointer/Hitbox"]
 [editable path="Hurtbox"]
