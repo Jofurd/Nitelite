@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://Sprites/Player/mage.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player/player.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://HBoxes/Hurtbox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scripts/Player/EnemyDetectionZone.gd" type="Script" id=10]
 [ext_resource path="res://Music And Sounds/forest_action.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Sprites/UI/respawn_hover.png" type="Texture" id=12]
 [ext_resource path="res://Prefabs/Player/PauseHandler.gd" type="Script" id=13]
 [ext_resource path="res://Sprites/Player/paused.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/UI/quit_normal.png" type="Texture" id=15]
@@ -19,6 +20,9 @@
 [ext_resource path="res://Sprites/UI/quit_pressed.png" type="Texture" id=18]
 [ext_resource path="res://Sprites/UI/quit_hover.png" type="Texture" id=19]
 [ext_resource path="res://Sprites/UI/resume_pressed.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/UI/respawn_normal.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/UI/respawn_pressed.png" type="Texture" id=22]
+[ext_resource path="res://Prefabs/Player/RespawnFinder.gd" type="Script" id=23]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 5.47642, 4.89058, 3.95344, 5.02302, 0.708849, 9.52575, -8.6939, 4.82441, -16.7061, 5.95013, -19.4209, 10.188, -26.1088, 0.387977, -20.0832, -9.80938, -16.8386, -6.56478, -8.82637, -4.57832, 0.973645, -9.74324, 3.5561, -4.84323, 5.9399, -4.77702, 5.93991, -2.19458, 3.8872, -2.12836, 3.821, 2.17571, 5.80749, 2.10949 )
@@ -557,6 +561,9 @@ radius = 174.683
 radius = 2.45175
 height = 13.458
 
+[sub_resource type="CircleShape2D" id=50]
+radius = 8.45308
+
 [node name="player" type="KinematicBody2D"]
 position = Vector2( 0, 0.187286 )
 collision_layer = 2
@@ -590,7 +597,7 @@ position = Vector2( 0, -10 )
 texture = ExtResource( 1 )
 hframes = 12
 vframes = 6
-frame = 2
+frame = 1
 
 [node name="damage" parent="Sprite" instance=ExtResource( 8 )]
 
@@ -705,9 +712,9 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 14 )
 
 [node name="resume" type="TextureButton" parent="CanvasLayer/PauseHandler"]
-margin_left = 207.0
+margin_left = 257.0
 margin_top = 87.453
-margin_right = 249.0
+margin_right = 299.0
 margin_bottom = 99.453
 rect_scale = Vector2( 1.2, 1.2 )
 texture_normal = ExtResource( 16 )
@@ -719,9 +726,9 @@ __meta__ = {
 }
 
 [node name="quit" type="TextureButton" parent="CanvasLayer/PauseHandler"]
-margin_left = 207.0
+margin_left = 257.0
 margin_top = 200.0
-margin_right = 260.0
+margin_right = 310.0
 margin_bottom = 212.0
 rect_scale = Vector2( 1.2, 1.2 )
 texture_normal = ExtResource( 15 )
@@ -732,10 +739,48 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="DeathScreen" type="Popup" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite2" type="Sprite" parent="CanvasLayer/DeathScreen"]
+modulate = Color( 1, 1, 1, 0.701961 )
+position = Vector2( 263.409, 144.081 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 14 )
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/DeathScreen"]
+margin_left = 207.0
+margin_top = 106.38
+margin_right = 259.0
+margin_bottom = 118.38
+texture_normal = ExtResource( 21 )
+texture_pressed = ExtResource( 22 )
+texture_hover = ExtResource( 12 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RespawnFinder" type="Area2D" parent="."]
+visible = false
+collision_layer = 1024
+collision_mask = 1024
+script = ExtResource( 23 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnFinder"]
+shape = SubResource( 50 )
+
 [connection signal="timeout" from="pointer/Timer" to="pointer" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="pressed" from="CanvasLayer/PauseHandler/resume" to="CanvasLayer/PauseHandler" method="_on_resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseHandler/quit" to="CanvasLayer/PauseHandler" method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/DeathScreen/TextureButton" to="." method="_on_respawn_pressed"]
+[connection signal="area_entered" from="RespawnFinder" to="." method="_on_RespawnFinder_area_entered"]
+[connection signal="area_exited" from="RespawnFinder" to="." method="_on_RespawnFinder_area_exited"]
 
 [editable path="HealthUI"]
 [editable path="Hurtbox"]
