@@ -22,6 +22,8 @@ onready var softCollision = $SoftCollision
 onready var stopHurtSound = $hurt
 onready var stopBeamSound = $startBeam
 onready var burrowTimer = $BurrowTimer
+onready var beamHitbox = $Sprite/flowerpointer/Hitbox/CollisionShape2D
+onready var chaserHitbox = $Sprite/flowerpointer/ChaserBeam/Hitbox/CollisionShape2D
 
 
 enum{
@@ -104,6 +106,9 @@ func exit_hurt():
 	animationState.travel("Hidden")
 	hurtBox.monitorable = false
 	hurtBox.monitoring = false
+	beamHitbox.disabled = true
+	chaserHitbox.disabled = true
+	
 
 func burrowed():
 	state = MOVING
@@ -113,6 +118,8 @@ func burrowed():
 func emerged():
 	hurtBox.monitorable = true
 	hurtBox.monitoring = true
+	beamHitbox.disabled = false
+	chaserHitbox.disabled = false
 	if farPlayerDetection.can_see_player():
 		animationState.travel("Shooting")
 		state = SHOOTING
@@ -122,8 +129,13 @@ func emerged():
 func _on_Stats_no_health():
 	death_state()
 	
+
+var ispointerhere = true
 func death_state():
 	state = DEATH
+	if ispointerhere == true:
+		flowerPointer.queue_free()
+		ispointerhere = false
 	animationState.travel("Death")
 
 func _on_Hurtbox_area_entered(area):

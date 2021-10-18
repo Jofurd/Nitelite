@@ -5,25 +5,40 @@ const BALL_SPEED = 300
 var cooldown = false
 onready var swingPosition = $SwingMarker
 onready var timer = $Timer
+onready var hitbox = $Hitbox/CollisionShape2D
+onready var swingside = 1
 
 func _physics_process(_delta):
-	look_at(get_global_mouse_position())
+	if cooldown != true:
+		look_at(get_global_mouse_position())
+	else:
+		if swingside == 1:
+			self.rotate(.35)
+		else:
+			self.rotate(-.35)
 	if Input.is_action_just_pressed("primary_action"):
 		if cooldown == false:
 			attack()
 	
 	if Input.is_action_just_pressed("secondary_action"):
-		cast()
+		pass
 	
 
 func attack():
-	
-	var swordSwing = load("res://Prefabs/Player/SwordSwing.tscn")
+	timer.start()
+	hitbox.disabled = false
+	if swingside == 1:
+		self.rotate(90)
+		swingside = 0
+	else:
+		self.rotate(-90)
+		swingside = 1
+	var swordSwing = load("res://Prefabs/Sounds/sword_swing.tscn")
 	var swing_instance = swordSwing.instance()
 	swingPosition.add_child(swing_instance)
 	
-	self.cooldown = true
-	timer.start()
+	cooldown = true
+	
 
 func cast():
 	var magicBall = load("res://Prefabs/Player/MagicBall.tscn")
@@ -38,4 +53,5 @@ func cast():
 
 
 func _on_Timer_timeout():
-	self.cooldown = false
+	hitbox.disabled = true
+	cooldown = false

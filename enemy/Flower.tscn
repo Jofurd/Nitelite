@@ -413,7 +413,7 @@ position = Vector2( 0, -15 )
 texture = ExtResource( 2 )
 hframes = 4
 vframes = 6
-frame = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 anims/Burrow = SubResource( 1 )
@@ -444,7 +444,6 @@ emitting = false
 
 [node name="AnimatedSprite" parent="Sprite/flowerpointer/ChaserBeam" index="1"]
 scale = Vector2( 1e-05, 1e-05 )
-frame = 1
 
 [node name="smoke" parent="Sprite/flowerpointer/ChaserBeam" index="2"]
 material = SubResource( 37 )
