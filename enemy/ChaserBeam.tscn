@@ -107,6 +107,7 @@ texture = ExtResource( 8 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
 animation = "New Anim"
+frame = 1
 playing = true
 
 [node name="smoke" type="Particles2D" parent="."]

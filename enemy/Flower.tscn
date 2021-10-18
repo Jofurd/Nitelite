@@ -33,6 +33,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 3, 4, 5, 8, 9, 20 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "burrowed"
+} ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "Charge"
@@ -147,6 +161,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 9, 10, 11, 4, 5, 3 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "emerged"
+} ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -342,7 +370,7 @@ states/Shooting/node = SubResource( 18 )
 states/Shooting/position = Vector2( 914, 167 )
 transitions = [ "Idle", "Charge", SubResource( 19 ), "Shooting", "Finish", SubResource( 20 ), "Idle", "Burrow", SubResource( 21 ), "Hidden", "Emerge", SubResource( 22 ), "Idle", "Hurt", SubResource( 23 ), "Shooting", "Hurt", SubResource( 24 ), "Burrow", "Hidden", SubResource( 25 ), "Emerge", "Idle", SubResource( 26 ), "Finish", "Idle", SubResource( 27 ), "Charge", "Shooting", SubResource( 28 ), "Hurt", "Idle", SubResource( 29 ), "Idle", "Death", SubResource( 30 ), "Charge", "Death", SubResource( 31 ), "Shooting", "Death", SubResource( 32 ), "Finish", "Death", SubResource( 33 ), "Charge", "Hurt", SubResource( 34 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 64, -43 )
+graph_offset = Vector2( 39, 18 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=36]
 
@@ -385,7 +413,7 @@ position = Vector2( 0, -15 )
 texture = ExtResource( 2 )
 hframes = 4
 vframes = 6
-frame = 1
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 anims/Burrow = SubResource( 1 )
@@ -491,8 +519,13 @@ stream = ExtResource( 14 )
 [node name="startBeam" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 16 )
 
+[node name="BurrowTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="timeout" from="BurrowTimer" to="." method="_on_BurrowTimer_timeout"]
 
 [editable path="VisibilityCheck"]
 [editable path="Sprite/flowerpointer/ChaserBeam"]
