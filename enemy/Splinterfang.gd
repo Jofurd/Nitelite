@@ -4,7 +4,7 @@ var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
 export var ACCELERATION = 300
 export var MAX_SPEED = 50
-export var FRICTION = 300
+export var FRICTION = 600
 export var DASH_SPEED = 300
 
 onready var stats = $Stats

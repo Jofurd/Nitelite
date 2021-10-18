@@ -8,7 +8,9 @@ export var MAX_SPEED = 100
 
 enum{
 	MOVE,
-	DASH
+	DASH,
+	DEATH
+	
 }
 
 var state = MOVE
@@ -22,9 +24,11 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var hurtBox = $Hurtbox
 onready var enemyDetect = $EnemyDetectionZone
+onready var deathScreen = $CanvasLayer/DeathScreen
+onready var pauseHandler = $CanvasLayer/PauseHandler
 
 func _ready():
-	stats.connect("no_health", self, "queue_free")
+	stats.connect("no_health", self, "death_state")
 	animationTree.active = true
 	
 
@@ -37,8 +41,37 @@ func _physics_process(delta):
 		DASH:
 			dash_state(delta)
 		
+		DEATH:
+			death_state()
+		
 		
 	
+	
+	
+
+var campfire = null
+
+func can_see_campfire():
+	return campfire != null
+
+var respawnPoint = self.global_position
+func _on_RespawnFinder_area_entered(area):
+	campfire = area
+	respawnPoint = area.global_position
+	respawnPoint.y -= 20
+
+
+func _on_RespawnFinder_area_exited(_area):
+	campfire = null
+
+func death_state():
+	state = DEATH
+	self.pause_mode = 2
+	self.visible = false
+	pauseHandler.pause_mode = 1
+	get_tree().paused = true
+	deathScreen.visible = true
+
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -109,3 +142,15 @@ func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	hurtBox.start_invincibility(.5)
 
+
+
+
+func _on_respawn_pressed():
+	self.position = respawnPoint
+	stats.health = stats.max_health / 2
+	get_tree().paused = false
+	self.pause_mode = 0
+	pauseHandler.pause_mode = 2
+	self.visible = true
+	deathScreen.visible = false
+	state = MOVE

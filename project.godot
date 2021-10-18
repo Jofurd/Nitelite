@@ -95,6 +95,7 @@ pause={
 2d_physics/layer_8="MobVisibility"
 2d_physics/layer_9="ObjectVisibility"
 2d_physics/layer_10="LaserTarget"
+2d_physics/layer_11="Respawn"
 
 [physics]
 

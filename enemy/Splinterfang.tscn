@@ -250,7 +250,7 @@ height = 18.9674
 radius = 12.8676
 
 [sub_resource type="CircleShape2D" id=25]
-radius = 70.2276
+radius = 108.394
 
 [sub_resource type="CircleShape2D" id=26]
 radius = 6.95143
@@ -353,7 +353,7 @@ volume_db = 24.0
 [node name="VisibilityCheck" parent="." instance=ExtResource( 11 )]
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.2
 one_shot = true
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
