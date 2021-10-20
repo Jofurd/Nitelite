@@ -13,9 +13,9 @@ func _physics_process(_delta):
 		look_at(get_global_mouse_position())
 	else:
 		if swingside == 1:
-			self.rotate(.35)
+			self.rotate(.3)
 		else:
-			self.rotate(-.35)
+			self.rotate(-.3)
 	if Input.is_action_just_pressed("primary_action"):
 		if cooldown == false:
 			attack()
@@ -28,10 +28,10 @@ func attack():
 	timer.start()
 	hitbox.disabled = false
 	if swingside == 1:
-		self.rotate(90)
+		self.rotate(45)
 		swingside = 0
 	else:
-		self.rotate(-90)
+		self.rotate(-45)
 		swingside = 1
 	var swordSwing = load("res://Prefabs/Sounds/sword_swing.tscn")
 	var swing_instance = swordSwing.instance()

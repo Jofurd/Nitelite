@@ -101,13 +101,14 @@ func hurt_state():
 	animationState.travel("Hurt")
 
 func exit_hurt():
-	state = BURROWING
-	stopHurtSound.playing = false
-	animationState.travel("Hidden")
-	hurtBox.monitorable = false
-	hurtBox.monitoring = false
-	beamHitbox.disabled = true
-	chaserHitbox.disabled = true
+	if state != DEATH:
+		state = BURROWING
+		stopHurtSound.playing = false
+		animationState.travel("Hidden")
+		hurtBox.monitorable = false
+		hurtBox.monitoring = false
+		beamHitbox.disabled = true
+		chaserHitbox.disabled = true
 	
 
 func burrowed():
@@ -139,12 +140,14 @@ func death_state():
 	animationState.travel("Death")
 
 func _on_Hurtbox_area_entered(area):
-	state = HURT
-	stats.health -= area.damage
-	damageTint.play("DamageTint")
-	hurtBox.start_invincibility(.5)
-	flowerPointer.clear_chaser()
-	
+	if state != DEATH:
+		state = HURT
+		stats.health -= area.damage
+		damageTint.play("DamageTint")
+		hurtBox.start_invincibility(.5)
+		if flowerPointer != null:
+			flowerPointer.clear_chaser()
+		
 	var splinterEffect = load("res://enemy/LeafEffect.tscn")
 	var splinter_instance = splinterEffect.instance()
 	splinter_instance.position = global_position
