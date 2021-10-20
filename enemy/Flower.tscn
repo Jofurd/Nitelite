@@ -451,7 +451,11 @@ emitting = false
 explosiveness = 0.1
 
 [node name="Hitbox" parent="Sprite/flowerpointer/ChaserBeam" index="4"]
+visible = false
 damage = 3
+
+[node name="CollisionShape2D" parent="Sprite/flowerpointer/ChaserBeam" index="5"]
+visible = false
 
 [node name="AudioStreamPlayer2D" parent="Sprite/flowerpointer/ChaserBeam" index="6"]
 autoplay = false
@@ -469,6 +473,7 @@ visible = false
 shape = SubResource( 38 )
 
 [node name="Hitbox" parent="Sprite/flowerpointer" instance=ExtResource( 6 )]
+visible = false
 collision_mask = 516
 damage = 3
 
@@ -493,6 +498,7 @@ shape = SubResource( 40 )
 shape = SubResource( 41 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 8 )]
+visible = false
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]

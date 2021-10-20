@@ -1,16 +1,13 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://Sprites/Player/mage.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player/player.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Effects/light.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Player/pointer.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/Player/crosshair.png" type="Texture" id=5]
 [ext_resource path="res://Prefabs/Player/HealthUI.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Music And Sounds/forest_calm.mp3" type="AudioStream" id=7]
 [ext_resource path="res://Prefabs/damage.tscn" type="PackedScene" id=8]
 [ext_resource path="res://HBoxes/Hurtbox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scripts/Player/EnemyDetectionZone.gd" type="Script" id=10]
-[ext_resource path="res://Music And Sounds/forest_action.mp3" type="AudioStream" id=11]
 [ext_resource path="res://Sprites/UI/respawn_hover.png" type="Texture" id=12]
 [ext_resource path="res://Prefabs/Player/PauseHandler.gd" type="Script" id=13]
 [ext_resource path="res://Sprites/Player/paused.png" type="Texture" id=14]
@@ -25,19 +22,15 @@
 [ext_resource path="res://Prefabs/Player/RespawnFinder.gd" type="Script" id=23]
 [ext_resource path="res://HBoxes/Hitbox.tscn" type="PackedScene" id=24]
 
-[sub_resource type="CapsuleShape2D" id=51]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 2.50556
 height = 36.0116
-
-[sub_resource type="OccluderPolygon2D" id=1]
-polygon = PoolVector2Array( 5.47642, 4.89058, 3.95344, 5.02302, 0.708849, 9.52575, -8.6939, 4.82441, -16.7061, 5.95013, -19.4209, 10.188, -26.1088, 0.387977, -20.0832, -9.80938, -16.8386, -6.56478, -8.82637, -4.57832, 0.973645, -9.74324, 3.5561, -4.84323, 5.9399, -4.77702, 5.93991, -2.19458, 3.8872, -2.12836, 3.821, 2.17571, 5.80749, 2.10949 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 5.37431
 height = 6.26321
 
 [sub_resource type="Animation" id=3]
-resource_name = "CastDown"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -70,7 +63,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "CastLeft"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -103,7 +95,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-resource_name = "CastRight"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -136,7 +127,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-resource_name = "CastUp"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -169,7 +159,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=7]
-resource_name = "DashDown"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -202,7 +191,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=8]
-resource_name = "DashLeft"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -235,7 +223,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-resource_name = "DashRight"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -268,7 +255,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=10]
-resource_name = "DashUp"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -581,22 +567,24 @@ margin_top = -39.215
 margin_right = 32.283
 margin_bottom = 0.784954
 
+[node name="YSort" type="YSort" parent="."]
+position = Vector2( 0, 3.72529e-07 )
+
 [node name="pointer" type="Node2D" parent="."]
 position = Vector2( 0, -7 )
 script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="pointer"]
-light_mask = 0
 rotation = -1.5708
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 5 )
 
 [node name="SwingMarker" type="Node2D" parent="pointer"]
-position = Vector2( 25, 0 )
+position = Vector2( 10, 0 )
 
 [node name="Timer" type="Timer" parent="pointer"]
 process_mode = 0
-wait_time = 0.5
+wait_time = 0.1
 one_shot = true
 
 [node name="Hitbox" parent="pointer" instance=ExtResource( 24 )]
@@ -605,35 +593,17 @@ collision_mask = 8
 [node name="CollisionShape2D" parent="pointer/Hitbox" index="0"]
 position = Vector2( 18.5975, 0 )
 rotation = 1.57079
-shape = SubResource( 51 )
+shape = SubResource( 1 )
+disabled = true
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -10 )
 texture = ExtResource( 1 )
 hframes = 12
 vframes = 6
+frame = 2
 
 [node name="damage" parent="Sprite" instance=ExtResource( 8 )]
-
-[node name="Light2D" type="Light2D" parent="."]
-visible = false
-light_mask = 2
-position = Vector2( -1.15685e-13, 0.000200272 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
-texture_scale = 0.5
-color = Color( 1, 0.980392, 0.796078, 1 )
-energy = 0.5
-shadow_enabled = true
-shadow_gradient_length = 3.0
-shadow_filter = 1
-shadow_filter_smooth = 30.0
-shadow_item_cull_mask = 2
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-visible = false
-rotation = 1.5708
-occluder = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -687,16 +657,6 @@ script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionZone"]
 shape = SubResource( 48 )
-
-[node name="forest_calm" type="AudioStreamPlayer" parent="EnemyDetectionZone"]
-stream = ExtResource( 7 )
-volume_db = -10.0
-autoplay = true
-
-[node name="forest_action" type="AudioStreamPlayer" parent="EnemyDetectionZone"]
-stream = ExtResource( 11 )
-volume_db = -50.0
-autoplay = true
 
 [node name="VisibilityCheck" type="Area2D" parent="."]
 collision_layer = 128
