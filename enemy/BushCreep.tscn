@@ -280,6 +280,9 @@ collision_layer = 520
 position = Vector2( 0, -5 )
 shape = SubResource( 26 )
 
+[node name="Timer" parent="Hurtbox" index="1"]
+wait_time = 0.001
+
 [node name="VisibilityCheck" parent="." instance=ExtResource( 3 )]
 visible = false
 

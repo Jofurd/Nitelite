@@ -451,7 +451,6 @@ emitting = false
 explosiveness = 0.1
 
 [node name="Hitbox" parent="Sprite/flowerpointer/ChaserBeam" index="4"]
-visible = false
 damage = 3
 
 [node name="CollisionShape2D" parent="Sprite/flowerpointer/ChaserBeam" index="5"]
@@ -473,7 +472,6 @@ visible = false
 shape = SubResource( 38 )
 
 [node name="Hitbox" parent="Sprite/flowerpointer" instance=ExtResource( 6 )]
-visible = false
 collision_mask = 516
 damage = 3
 
@@ -505,6 +503,9 @@ collision_layer = 8
 position = Vector2( 0, -15 )
 shape = SubResource( 42 )
 
+[node name="Timer" parent="Hurtbox" index="1"]
+wait_time = 0.001
+
 [node name="Stats" parent="." instance=ExtResource( 11 )]
 max_health = 3
 
@@ -525,7 +526,6 @@ stream = ExtResource( 14 )
 stream = ExtResource( 16 )
 
 [node name="BurrowTimer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

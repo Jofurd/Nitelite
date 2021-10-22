@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Walking.mp3-e447325fce1ab41efa6e7e875d84971c.mp3str"
+
+[deps]
+
+source_file="res://Music And Sounds/Walking.mp3"
+dest_files=[ "res://.import/Walking.mp3-e447325fce1ab41efa6e7e875d84971c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

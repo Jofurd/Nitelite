@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Music And Sounds/hornet_dash.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Music And Sounds/Dash2.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Prefabs/AudioStreamPlayer.gd" type="Script" id=2]
 
 [node name="Audio Node" type="Node2D"]
@@ -8,7 +8,6 @@ script = ExtResource( 2 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-volume_db = -10.0
 autoplay = true
 
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]

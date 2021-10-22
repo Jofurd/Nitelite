@@ -26,6 +26,7 @@ onready var hurtBox = $Hurtbox
 onready var enemyDetect = $EnemyDetectionZone
 onready var deathScreen = $CanvasLayer/DeathScreen
 onready var pauseHandler = $CanvasLayer/PauseHandler
+onready var walkingSound = $WalkingSound
 
 func _ready():
 	stats.connect("no_health", self, "death_state")
@@ -51,7 +52,7 @@ func _physics_process(delta):
 
 var campfire = null
 
-var respawnPoint = self.global_position
+var respawnPoint = global_position
 var respawn_ID = 0
 func _on_RespawnFinder_area_entered(area):
 	campfire = area
@@ -94,10 +95,14 @@ func move_state(delta):
 		animationTree.set("parameters/dash/blend_position", input_vector)
 		animationState.travel("run")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
+		if walkingSound.playing == false:
+			walkingSound.playing = true
 	
 	else:
 		animationState.travel("idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		if walkingSound.playing == true:
+			walkingSound.playing = false
 	
 	move()
 	
@@ -109,6 +114,8 @@ func move_state(delta):
 
 
 func dash_state(_delta):
+	if walkingSound.playing == true:
+			walkingSound.playing = false
 	var DashDust = load("res://Prefabs/Player/DashDust.tscn")
 	var dust_instance = DashDust.instance()
 	dust_instance.position = global_position
@@ -149,7 +156,13 @@ func _on_Hurtbox_area_entered(area):
 	damageTint.play("DamageTint")
 	stats.health -= area.damage
 	hurtBox.start_invincibility(.5)
-
+	
+	
+	var hurtSound = load("res://Prefabs/Sounds/PlayerHurt.tscn")
+	var hurtsound_instance = hurtSound.instance()
+	hurtsound_instance.position = global_position
+	self.add_child(hurtsound_instance)
+	
 
 
 

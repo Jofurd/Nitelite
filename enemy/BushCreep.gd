@@ -6,6 +6,8 @@ export var MAX_SPEED = 100
 export var FRICTION = 150
 export var DASH_SPEED = 300
 
+var damageNumbers = preload("res://Prefabs/DamageNumber.tscn")
+
 onready var stats = $Stats
 onready var sprite = $bushcreep
 onready var animationPlayer = $bushcreep/AnimationPlayer
@@ -96,10 +98,15 @@ func _on_Hurtbox_area_entered(area):
 	damageTint.play("DamageTint")
 	hurtBox.start_invincibility(.5)
 	
+	var text = damageNumbers.instance()
+	text.amount = area.damage
+	text.position = global_position
+	var world = get_tree().current_scene
+	world.add_child(text)
+	
 	var splinterEffect = load("res://enemy/LeafEffect.tscn")
 	var splinter_instance = splinterEffect.instance()
 	splinter_instance.position = global_position
-	var world = get_tree().current_scene
 	world.add_child(splinter_instance)
 	
 	var hurt_soundEffect = load("res://Prefabs/Sounds/small_grass_poof.tscn")

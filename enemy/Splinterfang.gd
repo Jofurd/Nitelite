@@ -7,6 +7,8 @@ export var MAX_SPEED = 50
 export var FRICTION = 600
 export var DASH_SPEED = 300
 
+var damageNumbers = preload("res://Prefabs/DamageNumber.tscn")
+
 onready var stats = $Stats
 onready var sprite = $sprite
 onready var animationPlayer = $sprite/AnimationPlayer
@@ -96,13 +98,18 @@ func seek_player():
 func _on_Hurtbox_area_entered(area):
 	state = HURT
 	stats.health -= area.damage
+	var text = damageNumbers.instance()
+	text.amount = area.damage
+	text.position = global_position
+	var world = get_tree().current_scene
+	world.add_child(text)
 	damageTint.play("DamageTint")
 	hurtBox.start_invincibility(.5)
 	
 	var splinterEffect = load("res://enemy/SplinterEffect.tscn")
 	var splinter_instance = splinterEffect.instance()
 	splinter_instance.position = global_position
-	var world = get_tree().current_scene
+	
 	world.add_child(splinter_instance)
 	
 

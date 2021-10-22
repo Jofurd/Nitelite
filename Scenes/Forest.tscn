@@ -710,9 +710,6 @@ position = Vector2( 814.652, 887.145 )
 [node name="Timer" parent="YSort/player/pointer" index="2"]
 wait_time = 0.15
 
-[node name="Sprite" parent="YSort/player" index="3"]
-frame = 0
-
 [node name="AnimationTree" parent="YSort/player" index="6"]
 parameters/playback = SubResource( 97 )
 
@@ -5621,5 +5618,4 @@ shape = SubResource( 100 )
 [editable path="YSort/player"]
 [editable path="YSort/player/HealthUI"]
 [editable path="YSort/player/pointer/Hitbox"]
-[editable path="YSort/player/Hurtbox"]
 [editable path="SceneChanger"]

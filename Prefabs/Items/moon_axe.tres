@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Prefabs/Items/Item.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Item/moon_axe.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Moon Axe"
+texture = ExtResource( 2 )
+stackable = false
+amount = 1
+heldForm = "res://Prefabs/Items/moon_axe.tscn"
