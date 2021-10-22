@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/WalkingIndoors.mp3-6cb574e4db9524cb4fdc1cb3d1ec80ca.mp3str"
+
+[deps]
+
+source_file="res://Music And Sounds/WalkingIndoors.mp3"
+dest_files=[ "res://.import/WalkingIndoors.mp3-6cb574e4db9524cb4fdc1cb3d1ec80ca.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

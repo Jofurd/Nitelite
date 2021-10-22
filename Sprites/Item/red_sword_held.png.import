@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pillar1.png-0ae1ec6c606da85d1efb8bec0bb60074.stex"
+path="res://.import/red_sword_held.png-6f09587c6730b31961c7454290e0b957.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/World/pillar1.png"
-dest_files=[ "res://.import/pillar1.png-0ae1ec6c606da85d1efb8bec0bb60074.stex" ]
+source_file="res://Sprites/Item/red_sword_held.png"
+dest_files=[ "res://.import/red_sword_held.png-6f09587c6730b31961c7454290e0b957.stex" ]
 
 [params]
 
