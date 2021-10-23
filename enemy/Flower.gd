@@ -145,7 +145,7 @@ func _on_Hurtbox_area_entered(area):
 		state = HURT
 		stats.health -= area.damage
 		damageTint.play("DamageTint")
-		hurtBox.start_invincibility(.5)
+		hurtBox.start_invincibility(.1)
 		if flowerPointer != null:
 			flowerPointer.clear_chaser()
 		

@@ -3,9 +3,9 @@ extends KinematicBody2D
 var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
 export var ACCELERATION = 300
-export var MAX_SPEED = 50
+export var MAX_SPEED = 40
 export var FRICTION = 600
-export var DASH_SPEED = 300
+export var DASH_SPEED = 10
 
 var damageNumbers = preload("res://Prefabs/DamageNumber.tscn")
 
@@ -26,7 +26,6 @@ onready var timer = $Timer
 
 enum{
 	ATTACK,
-	HURT,
 	DEATH,
 	IDLE,
 	CHASE
@@ -38,7 +37,7 @@ var timerCheck = false
 func _physics_process(delta):
 	match state:
 		ATTACK:
-			var targetPlayer = attackRange.player
+			var targetPlayer = playerDetectionZone.player
 			if targetPlayer != null:
 				if timerCheck == true:
 					animationState.travel("Attack")
@@ -46,14 +45,8 @@ func _physics_process(delta):
 					velocity = velocity.move_toward(direction * DASH_SPEED, ACCELERATION * delta)
 					sprite.flip_h = velocity.x > 0
 				else:
-					state = IDLE
-			else:
-				state = IDLE
+					state = CHASE
 			
-		
-		HURT:
-			velocity = velocity.move_toward(Vector2.ZERO, MAX_SPEED * delta)
-			hurt_state()
 		
 		DEATH:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -70,7 +63,8 @@ func _physics_process(delta):
 				animationState.travel("Move")
 				var direction = (player.global_position - global_position).normalized()
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-				lunge_player()
+				if timerCheck == false:
+					lunge_player()
 			else:
 				state = IDLE
 			sprite.flip_h = velocity.x > 0
@@ -96,7 +90,6 @@ func seek_player():
 
 
 func _on_Hurtbox_area_entered(area):
-	state = HURT
 	stats.health -= area.damage
 	var text = damageNumbers.instance()
 	text.amount = area.damage
@@ -109,20 +102,28 @@ func _on_Hurtbox_area_entered(area):
 	var splinterEffect = load("res://enemy/SplinterEffect.tscn")
 	var splinter_instance = splinterEffect.instance()
 	splinter_instance.position = global_position
-	
 	world.add_child(splinter_instance)
 	
-
-func hurt_state():	
-	animationState.travel("Hurt")
+	var leafEffect = load("res://enemy/LeafEffect.tscn")
+	var leaves_instance = leafEffect.instance()
+	leaves_instance.position = global_position
+	world.add_child(leaves_instance)
+	
 	
 
-func stop_hurt_sound():
-	stopHurtSound.playing = false
 
-func exit_hurt():
+func ground_smash():
+	var groundSmash = load("res://Prefabs/Effects/GroundSmash.tscn")
+	var smash_instance = groundSmash.instance()
+	smash_instance.position = global_position
+	var world = get_tree().current_scene
+	world.add_child(smash_instance)
 	
-	state = IDLE
+	groundSmash = load("res://Prefabs/Effects/GroundSmash2.tscn")
+	smash_instance = groundSmash.instance()
+	smash_instance.position = global_position
+	world.add_child(smash_instance)
+
 
 
 func _on_Stats_no_health():

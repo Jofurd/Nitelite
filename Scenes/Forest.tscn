@@ -1,8 +1,9 @@
-[gd_scene load_steps=117 format=2]
+[gd_scene load_steps=118 format=2]
 
 [ext_resource path="res://Sprites/World/tree_cover.png" type="Texture" id=1]
 [ext_resource path="res://Tilesets/ground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://enemy/Splinterfang.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemy/Oakgre.tscn" type="PackedScene" id=4]
 [ext_resource path="res://world/campfire.tscn" type="PackedScene" id=5]
 [ext_resource path="res://world/cliff.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world/falling_leaves.tscn" type="PackedScene" id=7]
@@ -707,10 +708,10 @@ z_index = 5
 [node name="player" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 814.652, 887.145 )
 
-[node name="Timer" parent="YSort/player/pointer" index="2"]
-wait_time = 0.15
+[node name="Sprite" parent="YSort/player" index="2"]
+frame = 0
 
-[node name="AnimationTree" parent="YSort/player" index="6"]
+[node name="AnimationTree" parent="YSort/player" index="5"]
 parameters/playback = SubResource( 97 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/player"]
@@ -3061,7 +3062,7 @@ position = Vector2( 256.063, 581.484 )
 position = Vector2( 972.733, 109.452 )
 
 [node name="Splinterfang12" parent="YSort/Splinterfangs" instance=ExtResource( 3 )]
-position = Vector2( 709.312, 228.697 )
+position = Vector2( 709.312, 229.117 )
 
 [node name="Splinterfang13" parent="YSort/Splinterfangs" instance=ExtResource( 3 )]
 position = Vector2( 633.33, 106.466 )
@@ -5548,9 +5549,6 @@ position = Vector2( 2000.4, -1540.27 )
 [node name="flower" type="YSort" parent="YSort"]
 position = Vector2( -425.796, -772.741 )
 
-[node name="Flower" parent="YSort/flower" instance=ExtResource( 13 )]
-position = Vector2( 1123.82, 917.077 )
-
 [node name="Flower4" parent="YSort/flower" instance=ExtResource( 13 )]
 position = Vector2( 337.216, 1268.67 )
 
@@ -5592,6 +5590,11 @@ respawn_ID = 2
 position = Vector2( -1002.14, 878.823 )
 respawn_ID = 3
 
+[node name="Oakgre" type="YSort" parent="YSort"]
+
+[node name="Oakgre" parent="YSort/Oakgre" instance=ExtResource( 4 )]
+position = Vector2( 669.766, 138.549 )
+
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 0.196078, 0.376471, 0.709804, 0.494118 )
 light_mask = 0
@@ -5616,6 +5619,6 @@ position = Vector2( -5.51685, -77.7798 )
 shape = SubResource( 100 )
 
 [editable path="YSort/player"]
-[editable path="YSort/player/HealthUI"]
-[editable path="YSort/player/pointer/Hitbox"]
+[editable path="YSort/player/Hurtbox"]
+[editable path="YSort/player/HealthBarContainer/HealthUI"]
 [editable path="SceneChanger"]

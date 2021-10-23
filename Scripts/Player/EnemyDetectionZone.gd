@@ -1,11 +1,11 @@
 extends Area2D
 
-export onready var actionTrack = $forest_action
+#export onready var actionTrack = $forest_action
 
 
-func is_colliding():
-	var areas = get_overlapping_areas()
-	return areas.size() > 0
+#func is_colliding():
+#	var areas = get_overlapping_areas()
+#	return areas.size() > 0
 
 
 #func _process(_delta):
