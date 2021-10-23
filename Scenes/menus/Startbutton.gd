@@ -19,7 +19,7 @@ func _on_Hurtbox_area_entered(area):
 	var world = get_tree().current_scene
 	world.add_child(text)
 	damageTint.play("DamageTint")
-	hurtBox.start_invincibility(.5)
+	hurtBox.start_invincibility(.1)
 	animationState.travel("Hurt")
 
 func exit_hurt():

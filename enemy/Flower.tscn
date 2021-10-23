@@ -413,7 +413,7 @@ position = Vector2( 0, -15 )
 texture = ExtResource( 2 )
 hframes = 4
 vframes = 6
-frame = 1
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 anims/Burrow = SubResource( 1 )

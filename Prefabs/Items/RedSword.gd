@@ -4,7 +4,6 @@ const BALL_SPEED = 300
 
 var cooldown = false
 onready var swingPosition = $SwingMarker
-onready var timer = $Timer
 onready var slashHitbox = $Sprite/SlashHitbox/CollisionShape2D
 onready var stabHitbox = $Sprite/StabHitbox/CollisionShape2D
 onready var animationPlayer = $Sprite/AnimationPlayer

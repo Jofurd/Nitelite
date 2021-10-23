@@ -3,9 +3,9 @@ extends KinematicBody2D
 var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
 export var ACCELERATION = 300
-export var MAX_SPEED = 50
+export var MAX_SPEED = 40
 export var FRICTION = 600
-export var DASH_SPEED = 300
+export var DASH_SPEED = 90
 
 var damageNumbers = preload("res://Prefabs/DamageNumber.tscn")
 
@@ -87,7 +87,7 @@ func lunge_player():
 	if attackRange.can_see_player():
 		if timerCheck == false:
 			timerCheck = true
-			timer.start()
+			timer.start(2)
 			state = ATTACK
 
 func seek_player():
@@ -106,7 +106,7 @@ func _on_Hurtbox_area_entered(area):
 	damageTint.play("DamageTint")
 	hurtBox.start_invincibility(.1)
 	
-	var splinterEffect = load("res://enemy/SplinterEffect.tscn")
+	var splinterEffect = load("res://Prefabs/Effects/NecroslimeHurt.tscn")
 	var splinter_instance = splinterEffect.instance()
 	splinter_instance.position = global_position
 	

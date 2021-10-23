@@ -572,7 +572,7 @@ position = Vector2( 0, -10 )
 texture = ExtResource( 1 )
 hframes = 12
 vframes = 6
-frame = 31
+frame = 1
 
 [node name="damage" parent="Sprite" instance=ExtResource( 8 )]
 
@@ -602,6 +602,7 @@ anims/RunUp = SubResource( 17 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 44 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 45 )
 parameters/attack/blend_position = Vector2( 0, 1 )
 parameters/dash/blend_position = Vector2( 0, 1 )
@@ -755,6 +756,7 @@ margin_bottom = 0.784954
 
 [node name="WalkingSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 11 )
+volume_db = 5.0
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="pressed" from="CanvasLayer/PauseHandler/resume" to="CanvasLayer/PauseHandler" method="_on_resume_pressed"]

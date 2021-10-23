@@ -29,9 +29,7 @@ func _on_Timer_timeout():
 
 
 func _on_Hurtbox_invincibility_ended():
-	print("vulnerable")
 	collisionShape.disabled = false
 
 func _on_Hurtbox_invincibility_started():
-	print("invincible!!!!")
 	collisionShape.set_deferred("disabled", true)

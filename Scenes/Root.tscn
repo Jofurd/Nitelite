@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Sprites/Player/paused.png" type="Texture" id=1]
 [ext_resource path="res://Prefabs/damage.tscn" type="PackedScene" id=2]
@@ -10,8 +10,9 @@
 [ext_resource path="res://Sprites/UI/start.png" type="Texture" id=8]
 [ext_resource path="res://enemy/Flower.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Tilesets/tiles.png" type="Texture" id=10]
+[ext_resource path="res://enemy/Oakgre.tscn" type="PackedScene" id=13]
 
-[sub_resource type="TileSet" id=15]
+[sub_resource type="TileSet" id=1]
 0/name = "tiles.png 0"
 0/texture = ExtResource( 10 )
 0/tex_offset = Vector2( 0, 0 )
@@ -34,8 +35,7 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="Animation" id=1]
-resource_name = "Death"
+[sub_resource type="Animation" id=2]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -64,8 +64,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Hurt"
+[sub_resource type="Animation" id=3]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -94,8 +93,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Idle"
+[sub_resource type="Animation" id=4]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -110,40 +108,40 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=4]
+[sub_resource type="AnimationNodeAnimation" id=5]
 animation = "Death"
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "Hurt"
 
-[sub_resource type="AnimationNodeAnimation" id=6]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "Idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=7]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=8]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=9]
 
-[sub_resource type="AnimationNodeStateMachine" id=10]
-states/Death/node = SubResource( 4 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachine" id=11]
+states/Death/node = SubResource( 5 )
 states/Death/position = Vector2( 494, 91 )
-states/Hurt/node = SubResource( 5 )
+states/Hurt/node = SubResource( 6 )
 states/Hurt/position = Vector2( 652, 91 )
-states/Idle/node = SubResource( 6 )
+states/Idle/node = SubResource( 7 )
 states/Idle/position = Vector2( 802, 91 )
-transitions = [ "Idle", "Hurt", SubResource( 7 ), "Hurt", "Idle", SubResource( 8 ), "Hurt", "Death", SubResource( 9 ) ]
+transitions = [ "Idle", "Hurt", SubResource( 8 ), "Hurt", "Idle", SubResource( 9 ), "Hurt", "Death", SubResource( 10 ) ]
 start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=11]
-
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 52, 24 )
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 52, 24 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=14]
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 52, 24 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
 [node name="world" type="Node2D"]
 
@@ -163,7 +161,7 @@ __meta__ = {
 }
 
 [node name="ground" type="TileMap" parent="."]
-tile_set = SubResource( 15 )
+tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 0, 0, 0, 64, 0, 0 )
 format = 1
@@ -189,30 +187,30 @@ hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Start/Sprite"]
 autoplay = "Idle"
-anims/Death = SubResource( 1 )
-anims/Hurt = SubResource( 2 )
-anims/Idle = SubResource( 3 )
+anims/Death = SubResource( 2 )
+anims/Hurt = SubResource( 3 )
+anims/Idle = SubResource( 4 )
 
 [node name="damage" parent="Start/Sprite" instance=ExtResource( 2 )]
 
 [node name="AnimationTree" type="AnimationTree" parent="Start/Sprite"]
-tree_root = SubResource( 10 )
+tree_root = SubResource( 11 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 11 )
+parameters/playback = SubResource( 12 )
 
 [node name="Hurtbox" parent="Start" instance=ExtResource( 3 )]
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Start/Hurtbox" index="0"]
-shape = SubResource( 12 )
+shape = SubResource( 13 )
 
 [node name="Timer" parent="Start/Hurtbox" index="1"]
 wait_time = 0.001
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Start"]
 visible = false
-shape = SubResource( 13 )
+shape = SubResource( 14 )
 
 [node name="Stats" parent="Start" instance=ExtResource( 4 )]
 max_health = 3
@@ -222,22 +220,34 @@ max_health = 3
 [node name="player" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 256, 144 )
 
-[node name="AnimationTree" parent="YSort/player" index="6"]
-parameters/playback = SubResource( 14 )
+[node name="Sprite" parent="YSort/player" index="2"]
+frame = 0
+
+[node name="AnimationTree" parent="YSort/player" index="5"]
+parameters/playback = SubResource( 15 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/player"]
 remote_path = NodePath("../../../Camera2D")
 
 [node name="Flower" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( 764, 580 )
+position = Vector2( -207.08, 813.416 )
 
 [node name="Flower2" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( 464, 580 )
+position = Vector2( -507.08, 813.416 )
+
+[node name="Oakgre" parent="YSort" instance=ExtResource( 13 )]
+position = Vector2( 688.673, 496.814 )
+
+[node name="Oakgre2" parent="YSort" instance=ExtResource( 13 )]
+position = Vector2( 592.146, 549.688 )
+
+[node name="Oakgre3" parent="YSort" instance=ExtResource( 13 )]
+position = Vector2( 759.73, 403.317 )
 
 [connection signal="area_entered" from="Start/Hurtbox" to="Start" method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Start/Stats" to="Start" method="_on_Stats_no_health"]
 
 [editable path="Start/Hurtbox"]
 [editable path="YSort/player"]
-[editable path="YSort/player/HealthUI"]
 [editable path="YSort/player/Hurtbox"]
+[editable path="YSort/player/HealthBarContainer/HealthUI"]
