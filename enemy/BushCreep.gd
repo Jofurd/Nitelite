@@ -97,6 +97,8 @@ func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	damageTint.play("DamageTint")
 	hurtBox.start_invincibility(.1)
+	if area.knockback != null:
+		self.velocity = area.knockback
 	
 	var text = damageNumbers.instance()
 	text.amount = area.damage

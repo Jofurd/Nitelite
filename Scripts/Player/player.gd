@@ -27,14 +27,20 @@ onready var enemyDetect = $EnemyDetectionZone
 onready var deathScreen = $CanvasLayer/DeathScreen
 onready var pauseHandler = $CanvasLayer/PauseHandler
 onready var walkingSound = $WalkingSound
+onready var camera = $Camera2D
 
 func _ready():
 	stats.connect("no_health", self, "death_state")
 	animationTree.active = true
+	camera.position = global_position
 	
 
 
 func _physics_process(delta):
+	
+	camera.global_position = lerp(global_position,get_global_mouse_position(), .15)
+	
+	
 	match state:
 		MOVE:
 			move_state(delta)
