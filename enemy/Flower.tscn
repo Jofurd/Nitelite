@@ -444,6 +444,7 @@ emitting = false
 
 [node name="AnimatedSprite" parent="Sprite/flowerpointer/ChaserBeam" index="1"]
 scale = Vector2( 1e-05, 1e-05 )
+frame = 0
 
 [node name="smoke" parent="Sprite/flowerpointer/ChaserBeam" index="2"]
 material = SubResource( 37 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=2]
+[gd_scene load_steps=122 format=2]
 
 [ext_resource path="res://Sprites/World/tree_cover.png" type="Texture" id=1]
 [ext_resource path="res://Tilesets/ground.tscn" type="PackedScene" id=2]
@@ -9,8 +9,15 @@
 [ext_resource path="res://world/falling_leaves.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/SceneChanger.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Prefabs/Player/player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://world/temple_objects/pillar1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://world/temple_objects/pillar2.tscn" type="PackedScene" id=11]
 [ext_resource path="res://world/dark tree.tscn" type="PackedScene" id=12]
+[ext_resource path="res://enemy/BushCreep.tscn" type="PackedScene" id=13]
 [ext_resource path="res://world/Bush.tscn" type="PackedScene" id=14]
+[ext_resource path="res://enemy/NecroSlime.tscn" type="PackedScene" id=15]
+[ext_resource path="res://enemy/Oakgre.tscn" type="PackedScene" id=16]
+[ext_resource path="res://world/campfire.tscn" type="PackedScene" id=17]
+[ext_resource path="res://enemy/Splinterfang.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Tilesets/cliff_tiles.png" type="Texture" id=21]
 [ext_resource path="res://Tilesets/tiles.png" type="Texture" id=22]
 
@@ -706,13 +713,7 @@ z_index = 5
 [node name="player" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 192, 432 )
 
-[node name="Timer" parent="YSort/player/pointer" index="2"]
-wait_time = 0.15
-
-[node name="Sprite" parent="YSort/player" index="3"]
-frame = 2
-
-[node name="AnimationTree" parent="YSort/player" index="6"]
+[node name="AnimationTree" parent="YSort/player" index="5"]
 parameters/playback = SubResource( 97 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/player"]
@@ -3634,6 +3635,151 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Campfire" parent="YSort/campfires" instance=ExtResource( 17 )]
+position = Vector2( 192, 88 )
+
+[node name="Pillars" type="YSort" parent="YSort"]
+
+[node name="Bush" parent="YSort/Pillars" instance=ExtResource( 10 )]
+position = Vector2( 192, -1600 )
+
+[node name="Bush2" parent="YSort/Pillars" instance=ExtResource( 11 )]
+position = Vector2( 352, -1600 )
+
+[node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="Oakgre" parent="YSort/Enemies" instance=ExtResource( 16 )]
+position = Vector2( 272, -1496 )
+
+[node name="Necroslime" parent="YSort/Enemies" instance=ExtResource( 15 )]
+position = Vector2( 200, -1752 )
+
+[node name="Necroslime2" parent="YSort/Enemies" instance=ExtResource( 15 )]
+position = Vector2( 336, -1792 )
+
+[node name="Necroslime3" parent="YSort/Enemies" instance=ExtResource( 15 )]
+position = Vector2( 272, -1712 )
+
+[node name="BushCreep" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( -64, -1536 )
+
+[node name="BushCreep2" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( -88, -1408 )
+
+[node name="BushCreep3" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( -24, -1288 )
+
+[node name="BushCreep4" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 56, -1128 )
+
+[node name="BushCreep5" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 40, -1192 )
+
+[node name="BushCreep6" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 520, -1296 )
+
+[node name="BushCreep7" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 616, -1384 )
+
+[node name="BushCreep8" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 592, -1480 )
+
+[node name="BushCreep9" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 568, -1544 )
+
+[node name="BushCreep10" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 480, -1560 )
+
+[node name="BushCreep11" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 64, -1600 )
+
+[node name="BushCreep12" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 680, -1160 )
+
+[node name="BushCreep13" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 736, -1400 )
+
+[node name="BushCreep14" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 736, -1568 )
+
+[node name="BushCreep15" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 624, -1632 )
+
+[node name="BushCreep16" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 504, -1672 )
+
+[node name="BushCreep17" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 632, -1688 )
+
+[node name="BushCreep18" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 832, -1504 )
+
+[node name="BushCreep19" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( -360, -1432 )
+
+[node name="BushCreep20" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( -344, -1256 )
+
+[node name="BushCreep21" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( -192, -1200 )
+
+[node name="BushCreep22" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( -264, -1080 )
+
+[node name="BushCreep23" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( -240, -1088 )
+
+[node name="BushCreep24" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( -208, -1000 )
+
+[node name="BushCreep25" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( -56, -1016 )
+
+[node name="Splinterfang" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 216, -1448 )
+
+[node name="Splinterfang2" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 320, -1440 )
+
+[node name="Splinterfang3" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 288, -1368 )
+
+[node name="Splinterfang4" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 224, -1360 )
+
+[node name="Splinterfang5" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 152, -1440 )
+
+[node name="Splinterfang6" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 384, -1456 )
+
+[node name="Splinterfang7" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 384, -1376 )
+
+[node name="Splinterfang8" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 240, -1608 )
+
+[node name="Splinterfang9" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 296, -1600 )
+
+[node name="Splinterfang10" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 328, -1504 )
+
+[node name="Splinterfang11" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 200, -1512 )
+
+[node name="Splinterfang12" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 296, -1536 )
+
+[node name="Splinterfang13" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 408, -1528 )
+
+[node name="Splinterfang14" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 128, -1320 )
+
+[node name="Splinterfang15" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 360, -1312 )
+
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 0.196078, 0.376471, 0.709804, 0.494118 )
 light_mask = 0
@@ -3645,6 +3791,9 @@ hframes = 4
 frame = 1
 region_enabled = true
 region_rect = Rect2( -2454.81, -1204.58, 9000, 1826.73 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="SceneChanger" parent="." instance=ExtResource( 8 )]
 position = Vector2( 192, 464 )
@@ -3691,8 +3840,7 @@ position = Vector2( 0, -8 )
 shape = SubResource( 101 )
 
 [editable path="YSort/player"]
-[editable path="YSort/player/HealthUI"]
-[editable path="YSort/player/pointer/Hitbox"]
 [editable path="YSort/player/Hurtbox"]
+[editable path="YSort/player/HealthBarContainer/HealthUI"]
 [editable path="SceneChanger"]
 [editable path="SceneChanger2"]

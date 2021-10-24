@@ -237,7 +237,7 @@ states/Idle/position = Vector2( 625, 165 )
 states/Move/node = SubResource( 12 )
 states/Move/position = Vector2( 625, 272 )
 transitions = [ "Idle", "Death", SubResource( 13 ), "Death", "Idle", SubResource( 14 ), "Idle", "Move", SubResource( 15 ), "Move", "Idle", SubResource( 16 ), "Idle", "Attack", SubResource( 17 ), "Attack", "Idle", SubResource( 18 ), "Idle", "Hurt", SubResource( 19 ), "Hurt", "Idle", SubResource( 20 ) ]
-start_node = "Move"
+start_node = "Idle"
 graph_offset = Vector2( -18.8482, 30.9347 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
@@ -269,6 +269,7 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 modulate = Color( 1, 1, 1, 0.270588 )
@@ -280,7 +281,7 @@ position = Vector2( 0, -11 )
 texture = ExtResource( 9 )
 hframes = 8
 vframes = 4
-frame = 2
+frame = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="sprite"]
 anims/Attack = SubResource( 3 )
@@ -318,6 +319,7 @@ wait_time = 0.001
 max_health = 10
 
 [node name="AttackRange" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="CollisionShape2D" parent="AttackRange" index="0"]
 modulate = Color( 1, 0.615686, 0.615686, 1 )
@@ -325,6 +327,7 @@ self_modulate = Color( 0.952941, 0.952941, 0.952941, 1 )
 shape = SubResource( 25 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 7 )]
+visible = false
 modulate = Color( 1, 0, 0, 1 )
 self_modulate = Color( 1, 0, 0, 1 )
 collision_mask = 4
@@ -352,6 +355,7 @@ stream = ExtResource( 8 )
 volume_db = 24.0
 
 [node name="VisibilityCheck" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.2

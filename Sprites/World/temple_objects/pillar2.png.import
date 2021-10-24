@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pillar1.png-68ea00de5d9172af762a8d44b11e3b48.stex"
+path="res://.import/pillar2.png-e2ea3437f29ff3b71416708e1f832f0a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/World/temple_objects/pillar1.png"
-dest_files=[ "res://.import/pillar1.png-68ea00de5d9172af762a8d44b11e3b48.stex" ]
+source_file="res://Sprites/World/temple_objects/pillar2.png"
+dest_files=[ "res://.import/pillar2.png-e2ea3437f29ff3b71416708e1f832f0a.stex" ]
 
 [params]
 
