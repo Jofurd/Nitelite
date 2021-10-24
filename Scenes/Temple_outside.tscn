@@ -713,6 +713,9 @@ z_index = 5
 [node name="player" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 192, 432 )
 
+[node name="Sprite" parent="YSort/player" index="2"]
+frame = 0
+
 [node name="AnimationTree" parent="YSort/player" index="5"]
 parameters/playback = SubResource( 97 )
 
@@ -3651,15 +3654,6 @@ position = Vector2( 352, -1600 )
 [node name="Oakgre" parent="YSort/Enemies" instance=ExtResource( 16 )]
 position = Vector2( 272, -1496 )
 
-[node name="Necroslime" parent="YSort/Enemies" instance=ExtResource( 15 )]
-position = Vector2( 200, -1752 )
-
-[node name="Necroslime2" parent="YSort/Enemies" instance=ExtResource( 15 )]
-position = Vector2( 336, -1792 )
-
-[node name="Necroslime3" parent="YSort/Enemies" instance=ExtResource( 15 )]
-position = Vector2( 272, -1712 )
-
 [node name="BushCreep" parent="YSort/Enemies" instance=ExtResource( 13 )]
 position = Vector2( -64, -1536 )
 
@@ -3779,6 +3773,9 @@ position = Vector2( 128, -1320 )
 
 [node name="Splinterfang15" parent="YSort/Enemies" instance=ExtResource( 18 )]
 position = Vector2( 360, -1312 )
+
+[node name="Necroslime" parent="YSort/Enemies" instance=ExtResource( 15 )]
+position = Vector2( 272, -1680 )
 
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 0.196078, 0.376471, 0.709804, 0.494118 )

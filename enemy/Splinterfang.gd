@@ -105,6 +105,8 @@ func _on_Hurtbox_area_entered(area):
 	world.add_child(text)
 	damageTint.play("DamageTint")
 	hurtBox.start_invincibility(.1)
+	if area.knockback != null:
+		self.velocity = area.knockback
 	
 	var splinterEffect = load("res://enemy/SplinterEffect.tscn")
 	var splinter_instance = splinterEffect.instance()
