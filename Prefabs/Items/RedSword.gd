@@ -30,7 +30,7 @@ func swing():
 	
 	var mouse_position = get_global_mouse_position()
 	var knockback = (mouse_position - global_position).normalized()
-	slashArea.knockback = knockback * 100
+	slashArea.knockback = knockback * 60
 	
 	var swordSwing = load("res://Prefabs/Sounds/sword_swing.tscn")
 	var swing_instance = swordSwing.instance()

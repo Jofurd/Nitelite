@@ -4,7 +4,7 @@
 [ext_resource path="res://HBoxes/Hitbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Item/moon_axe_held.png" type="Texture" id=3]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "Stab"
 length = 0.2
 tracks/0/type = "value"
@@ -46,8 +46,7 @@ tracks/2/keys = {
 "values": [ -90.0 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Swing"
+[sub_resource type="Animation" id=2]
 length = 1.3
 step = 0.05
 tracks/0/type = "value"
@@ -104,7 +103,7 @@ tracks/3/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 8.99995
 height = 14.0001
 
@@ -118,18 +117,18 @@ rotation = -3.14159
 texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/Stab = SubResource( 3 )
-anims/Swing = SubResource( 1 )
+anims/Stab = SubResource( 1 )
+anims/Swing = SubResource( 2 )
 
 [node name="SlashHitbox" parent="Sprite" instance=ExtResource( 2 )]
 rotation = 1.5708
 collision_mask = 8
-damage = 8
+damage = 6
 
 [node name="CollisionShape2D" parent="Sprite/SlashHitbox" index="0"]
 position = Vector2( 31, -0.000108719 )
 rotation = 3.14159
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 disabled = true
 
 [node name="SwingMarker" type="Node2D" parent="."]

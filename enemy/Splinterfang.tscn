@@ -280,7 +280,7 @@ position = Vector2( 0, -11 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 4
-frame = 9
+frame = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="sprite"]
 anims/Attack = SubResource( 3 )
@@ -315,7 +315,7 @@ shape = SubResource( 24 )
 wait_time = 0.001
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
-max_health = 5
+max_health = 7
 
 [node name="AttackRange" parent="." instance=ExtResource( 5 )]
 visible = false
