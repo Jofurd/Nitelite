@@ -21,6 +21,7 @@ hframes = 12
 vframes = 6
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
+visible = false
 position = Vector2( 0, -9 )
 collision_layer = 520
 
@@ -28,6 +29,7 @@ collision_layer = 520
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 rotation = 1.5708
 shape = SubResource( 2 )
 

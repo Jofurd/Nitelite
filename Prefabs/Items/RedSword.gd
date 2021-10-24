@@ -5,7 +5,9 @@ const BALL_SPEED = 300
 var cooldown = false
 onready var swingPosition = $SwingMarker
 onready var slashHitbox = $Sprite/SlashHitbox/CollisionShape2D
+onready var slashArea = $Sprite/SlashHitbox
 onready var stabHitbox = $Sprite/StabHitbox/CollisionShape2D
+onready var stabArea= $Sprite/StabHitbox
 onready var animationPlayer = $Sprite/AnimationPlayer
 
 
@@ -26,6 +28,10 @@ func swing():
 	animationPlayer.stop()
 	animationPlayer.play("Swing")
 	
+	var mouse_position = get_global_mouse_position()
+	var knockback = (mouse_position - global_position).normalized()
+	slashArea.knockback = knockback * 100
+	
 	var swordSwing = load("res://Prefabs/Sounds/sword_swing.tscn")
 	var swing_instance = swordSwing.instance()
 	swingPosition.add_child(swing_instance)
@@ -35,6 +41,7 @@ func stab():
 	stabHitbox.disabled = false
 	animationPlayer.stop()
 	animationPlayer.play("Stab")
+	stabArea.knockback = null
 	
 	var swordSwing = load("res://Prefabs/Sounds/sword_swing.tscn")
 	var swing_instance = swordSwing.instance()
