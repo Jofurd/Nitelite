@@ -51,6 +51,7 @@ smoothing_enabled = true
 smoothing_speed = 7.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="ground" type="TileMap" parent="."]
@@ -97,34 +98,34 @@ __meta__ = {
 [node name="Necroslimes" type="YSort" parent="YSort"]
 
 [node name="Necroslime" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
-position = Vector2( -88, 624 )
+position = Vector2( -64, 480 )
 
 [node name="Necroslime2" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
-position = Vector2( -88, 248 )
+position = Vector2( -48, 304 )
 
 [node name="Necroslime3" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
-position = Vector2( 816, 184 )
+position = Vector2( 832, 160 )
 
 [node name="Necroslime4" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
-position = Vector2( 856, 232 )
+position = Vector2( 864, 224 )
 
 [node name="Necroslime5" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
-position = Vector2( 808, 232 )
+position = Vector2( 800, 224 )
 
 [node name="Necroslime6" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
-position = Vector2( 568, 424 )
+position = Vector2( 576, 416 )
 
 [node name="Necroslime7" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
-position = Vector2( 152, 312 )
+position = Vector2( 144, 312 )
 
 [node name="Necroslime8" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
-position = Vector2( 296, 312 )
+position = Vector2( 304, 312 )
 
 [node name="Necroslime9" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
-position = Vector2( -112, 776 )
+position = Vector2( -160, 768 )
 
 [node name="Necroslime10" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
-position = Vector2( -40, 792 )
+position = Vector2( 48, 728 )
 
 [node name="Necroslime11" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
 position = Vector2( 576, 968 )
@@ -133,7 +134,7 @@ position = Vector2( 576, 968 )
 position = Vector2( 624, 936 )
 
 [node name="Necroslime13" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
-position = Vector2( 392, 720 )
+position = Vector2( 400, 704 )
 
 [node name="Necroslime14" parent="YSort/Necroslimes" instance=ExtResource( 5 )]
 position = Vector2( 88, -512 )
@@ -145,6 +146,7 @@ position = Vector2( 200, -512 )
 position = Vector2( 272, -360 )
 
 [node name="lights" type="YSort" parent="."]
+visible = false
 
 [node name="wall_light" parent="lights" instance=ExtResource( 7 )]
 position = Vector2( 192, -32 )
